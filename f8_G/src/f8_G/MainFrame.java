@@ -1,6 +1,5 @@
 package f8_G;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,6 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainFrame extends JFrame {
 
@@ -78,5 +80,14 @@ public class MainFrame extends JFrame {
 		JLabel lblaarsmodell = new JLabel("Årsmodell:");
 		lblaarsmodell.setBounds(6, 105, 61, 16);
 		panel.add(lblaarsmodell);
+		
+		JButton btnLeggTil = new JButton("Legg til");
+		btnLeggTil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new Bil
+			}
+		});
+		btnLeggTil.setBounds(96, 179, 117, 29);
+		panel.add(btnLeggTil);
 	}
 }

@@ -17,6 +17,11 @@ public class Bil {
 		billiste.add(this);
 	}
 	
+	public void selg(){
+		billiste.remove(this);
+	}
+	
+	
 	//Overskrive toString metoden fra Object klassen
 	@Override
 	public String toString(){
