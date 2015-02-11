@@ -84,7 +84,7 @@ public class MainFrame extends JFrame {
 		JButton btnLeggTil = new JButton("Legg til");
 		btnLeggTil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Bil
+			
 			}
 		});
 		btnLeggTil.setBounds(96, 179, 117, 29);
