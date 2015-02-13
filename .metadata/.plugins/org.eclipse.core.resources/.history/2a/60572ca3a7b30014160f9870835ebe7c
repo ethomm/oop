@@ -1,0 +1,264 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+
+import varelager.Fisk;
+
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class MainFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField tfNavn;
+	private JTextField tfArtNavn;
+	private JTextField tfSlektsNavn;
+	private JTextField tfPrisInn;
+	private JTextField tfPrisUt;
+	private JTextField tfLNavn;
+	private JTextField tfLEpost;
+	private JTextField tfLAdresse;
+	private JTextField tfLPostnr;
+	private JTextField tfLPoststed;
+	private JTextField tfLtlf;
+	private JLabel lblSumAntallFisk;
+	private JLabel lblSumAntallProdukter;
+	private JLabel lblSumAntallReptiler;
+	private JLabel lblSumAntallPattedyr;
+
+	/**
+	 * Launch the application.
+	 */
+
+
+	/**
+	 * Create the frame.
+	 */
+	public MainFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 673, 426);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblLeggTilVare = new JLabel("Legg til:");
+		lblLeggTilVare.setBounds(19, 31, 183, 16);
+		contentPane.add(lblLeggTilVare);
+		
+		final JPanel panVare = new JPanel();
+		panVare.setBounds(19, 80, 285, 318);
+		contentPane.add(panVare);
+		panVare.setLayout(null);
+		panVare.setVisible(false);
+		
+		tfNavn = new JTextField();
+		tfNavn.setBounds(145, 6, 134, 28);
+		panVare.add(tfNavn);
+		tfNavn.setColumns(10);
+		
+		tfArtNavn = new JTextField();
+		tfArtNavn.setColumns(10);
+		tfArtNavn.setBounds(145, 124, 134, 28);
+		panVare.add(tfArtNavn);
+		
+		tfSlektsNavn = new JTextField();
+		tfSlektsNavn.setColumns(10);
+		tfSlektsNavn.setBounds(145, 164, 134, 28);
+		panVare.add(tfSlektsNavn);
+		
+		tfPrisInn = new JTextField();
+		tfPrisInn.setColumns(10);
+		tfPrisInn.setBounds(145, 204, 134, 28);
+		panVare.add(tfPrisInn);
+		
+		tfPrisUt = new JTextField();
+		tfPrisUt.setColumns(10);
+		tfPrisUt.setBounds(145, 244, 134, 28);
+		panVare.add(tfPrisUt);
+		
+		JComboBox LevBoks = new JComboBox();
+		LevBoks.setBounds(145, 85, 134, 27);
+		panVare.add(LevBoks);
+		
+		JLabel lblNavn = new JLabel("Navn");
+		lblNavn.setBounds(6, 12, 61, 16);
+		panVare.add(lblNavn);
+		
+		JLabel lblLeverandor = new JLabel("Leverandor:");
+		lblLeverandor.setBounds(6, 89, 100, 16);
+		panVare.add(lblLeverandor);
+		
+		JLabel lblArtsmavm = new JLabel("Artsnavn:");
+		lblArtsmavm.setBounds(6, 130, 89, 16);
+		panVare.add(lblArtsmavm);
+		
+		JLabel lblSlektsnavn = new JLabel("Slektsnavn");
+		lblSlektsnavn.setBounds(6, 170, 100, 16);
+		panVare.add(lblSlektsnavn);
+		
+		JLabel lblPrisInn = new JLabel("Pris inn:");
+		lblPrisInn.setBounds(6, 210, 61, 16);
+		panVare.add(lblPrisInn);
+		
+		JLabel lblPrisUt = new JLabel("Pris ut:");
+		lblPrisUt.setBounds(6, 250, 61, 16);
+		panVare.add(lblPrisUt);
+		
+		JButton btnLeggTilVare = new JButton("Legg til vare");
+		btnLeggTilVare.setBounds(162, 284, 117, 29);
+		panVare.add(btnLeggTilVare);
+		
+		JComboBox cbType = new JComboBox();
+		cbType.setBounds(145, 46, 134, 27);
+		panVare.add(cbType);
+		cbType.addItem("Fisk");
+		cbType.addItem("Pattedyr");
+		cbType.addItem("Reptil");
+		
+		JLabel lblType = new JLabel("Type Vare");
+		lblType.setBounds(6, 50, 61, 16);
+		panVare.add(lblType);
+		
+		final JPanel panLeverandor = new JPanel();
+		panLeverandor.setBounds(19, 80, 285, 307);
+		contentPane.add(panLeverandor);
+		panLeverandor.setLayout(null);
+		panLeverandor.setVisible(false);
+		
+		tfLNavn = new JTextField();
+		tfLNavn.setBounds(145, 6, 134, 28);
+		panLeverandor.add(tfLNavn);
+		tfLNavn.setColumns(10);
+		
+		tfLEpost = new JTextField();
+		tfLEpost.setColumns(10);
+		tfLEpost.setBounds(145, 48, 134, 28);
+		panLeverandor.add(tfLEpost);
+		
+		tfLAdresse = new JTextField();
+		tfLAdresse.setColumns(10);
+		tfLAdresse.setBounds(145, 88, 134, 28);
+		panLeverandor.add(tfLAdresse);
+		
+		tfLPostnr = new JTextField();
+		tfLPostnr.setColumns(10);
+		tfLPostnr.setBounds(145, 128, 134, 28);
+		panLeverandor.add(tfLPostnr);
+		
+		tfLPoststed = new JTextField();
+		tfLPoststed.setColumns(10);
+		tfLPoststed.setBounds(145, 168, 134, 28);
+		panLeverandor.add(tfLPoststed);
+		
+		tfLtlf = new JTextField();
+		tfLtlf.setColumns(10);
+		tfLtlf.setBounds(145, 208, 134, 28);
+		panLeverandor.add(tfLtlf);
+		
+		JLabel lblNavn_1 = new JLabel("Navn");
+		lblNavn_1.setBounds(6, 12, 61, 16);
+		panLeverandor.add(lblNavn_1);
+		
+		JLabel lblEpost = new JLabel("Epost:");
+		lblEpost.setBounds(6, 54, 61, 16);
+		panLeverandor.add(lblEpost);
+		
+		JLabel lblAdresse = new JLabel("Adresse:");
+		lblAdresse.setBounds(6, 94, 61, 16);
+		panLeverandor.add(lblAdresse);
+		
+		JLabel lblPostnr = new JLabel("Postnr:");
+		lblPostnr.setBounds(6, 134, 61, 16);
+		panLeverandor.add(lblPostnr);
+		
+		JLabel lblPoststed = new JLabel("Poststed:");
+		lblPoststed.setBounds(6, 174, 61, 16);
+		panLeverandor.add(lblPoststed);
+		
+		JLabel lblTelefon = new JLabel("Telefon");
+		lblTelefon.setBounds(6, 214, 61, 16);
+		panLeverandor.add(lblTelefon);
+		
+		JButton btnLeggTilLeverandr = new JButton("Legg til leverand\u00F8r");
+		btnLeggTilLeverandr.setBounds(129, 253, 150, 29);
+		panLeverandor.add(btnLeggTilLeverandr);
+		
+		JButton btnVare = new JButton("Vare");
+		btnVare.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panVare.setVisible(true);
+				panLeverandor.setVisible(false);
+			}
+		});
+		btnVare.setBounds(74, 26, 66, 29);
+		contentPane.add(btnVare);
+		
+		JButton btnLeverandr = new JButton("Leverand\u00F8r");
+		btnLeverandr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panVare.setVisible(false);
+				panLeverandor.setVisible(true);
+			}
+		});
+		btnLeverandr.setBounds(145, 26, 117, 29);
+		contentPane.add(btnLeverandr);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(316, 80, 267, 128);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Antall Produkter:");
+		lblNewLabel.setBounds(6, 6, 141, 16);
+		panel.add(lblNewLabel);
+		
+		JLabel lblAntallFisk = new JLabel("Antall Fisk");
+		lblAntallFisk.setBounds(6, 23, 141, 16);
+		panel.add(lblAntallFisk);
+		
+		JLabel lblAntallPattedyr = new JLabel("Antall Pattedyr:");
+		lblAntallPattedyr.setBounds(6, 42, 141, 16);
+		panel.add(lblAntallPattedyr);
+		
+		JLabel lblAntallReptiler = new JLabel("Antall Reptiler");
+		lblAntallReptiler.setBounds(6, 59, 141, 16);
+		panel.add(lblAntallReptiler);
+		
+		lblSumAntallPattedyr = new JLabel("0");
+		lblSumAntallPattedyr.setBounds(132, 42, 61, 16);
+		panel.add(lblSumAntallPattedyr);
+		
+		lblSumAntallFisk = new JLabel("0");
+		lblSumAntallFisk.setBounds(132, 23, 61, 16);
+		panel.add(lblSumAntallFisk);
+		
+		lblSumAntallProdukter = new JLabel("0");
+		lblSumAntallProdukter.setBounds(132, 6, 61, 16);
+		panel.add(lblSumAntallProdukter);
+		
+		lblSumAntallReptiler = new JLabel("0");
+		lblSumAntallReptiler.setBounds(132, 59, 61, 16);
+		panel.add(lblSumAntallReptiler);
+		
+	
+	}
+
+
+	private void oppdaterVarer() {
+		lblSumAntallFisk.setText(Fisk.getFiskeliste().size() + "");
+		
+	}
+}

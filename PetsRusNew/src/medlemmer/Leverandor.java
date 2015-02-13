@@ -1,11 +1,14 @@
 package medlemmer;
 
+import java.util.ArrayList;
+
 public class Leverandor {
 	private String navn;
 	private String ePost;
 	private String adr;
 	private String pSted;
 	private String tlf;
+	private static ArrayList<Leverandor> leverandorliste = new ArrayList<Leverandor>();
 	
 	
 	//Konstrukør for leverandør
@@ -15,6 +18,11 @@ public class Leverandor {
 		this.adr = adr;
 		this.pSted = pSted;
 		this.tlf = tlf;
+		leverandorliste.add(this);
+	}
+	@Override
+	public String toString(){
+		return this.getNavn();
 	}
 
 	//Getteers and setters
@@ -27,6 +35,10 @@ public class Leverandor {
 		this.navn = navn;
 	}
 
+
+	public static ArrayList<Leverandor> getLeverandorliste() {
+		return leverandorliste;
+	}
 
 	public String getePost() {
 		return ePost;
