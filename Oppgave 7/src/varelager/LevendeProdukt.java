@@ -1,0 +1,35 @@
+package varelager;
+
+import leverandoroversikt.Leverandor;
+
+public class LevendeProdukt extends Produkt {
+
+	private String slektsnavn;
+	private String artsnavn;
+	
+	public LevendeProdukt(String navn, double innPris, double utPris,
+			Leverandor leverandor, String produktBeskrivelse,
+			String slektsnavn, String artsnavn) {
+		super(navn, innPris, utPris, leverandor, produktBeskrivelse);
+		this.slektsnavn = slektsnavn;
+		this.artsnavn = artsnavn;
+	}
+
+	public String getSlektsnavn() {
+		return slektsnavn;
+	}
+
+	public void setSlektsnavn(String slektsnavn) {
+		this.slektsnavn = slektsnavn;
+	}
+
+	public String getArtsnavn() {
+		return artsnavn;
+	}
+
+	public void setArtsnavn(String artsnavn) {
+		this.artsnavn = artsnavn;
+	}
+	
+	
+}

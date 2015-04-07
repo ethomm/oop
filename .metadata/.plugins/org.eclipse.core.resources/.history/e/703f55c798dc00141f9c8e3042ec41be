@@ -1,0 +1,16 @@
+package gui;
+
+import leverandoroversikt.Leverandor;
+import leverandoroversikt.LeverandorOversikt;
+
+public class EventHandler {
+
+	//Skriverut 
+	public static void updateLeverandor(){
+		MainFrame.getCbLeverandorPattedyrReptil().removeAllItems();
+		for (Leverandor lev: LeverandorOversikt.hentLeverandorer()){
+			MainFrame.getCbLeverandorPattedyrReptil().addItem(lev);
+		}
+	}
+	
+}

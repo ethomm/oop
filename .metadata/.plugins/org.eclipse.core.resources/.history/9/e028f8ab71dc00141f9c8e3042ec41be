@@ -1,0 +1,33 @@
+package main;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+public class SkrivTilFil {
+	private String path;
+	
+	
+	//Konstruktør
+	public SkrivTilFil(String path){
+		this.path = path;
+	}
+	
+	private void writeToSerFile(){
+		//Åpner strøm til fil
+		try {
+			FileOutputStream outStream = new FileOutputStream(path);
+			
+			// åpner objekt strom til fil
+			ObjectOutputStream objOutStream = new ObjectOutputStream(outStream);
+			//Lukker strømmer
+			objOutStream.close();
+			outStream.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR: filen finnes ikke");
+		} catch (IOException e) {
+			System.out.println("ERROR: Kan ikke åpne objektstrøm til fil");
+		}
+	}
+}

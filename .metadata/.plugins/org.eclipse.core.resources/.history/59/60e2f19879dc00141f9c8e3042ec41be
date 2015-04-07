@@ -1,0 +1,38 @@
+package main;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+public class LesFraFil {
+
+	private String path;
+	
+	//Konstruktøren
+	public LesFraFil(String path){
+		this.path = path;	
+		readObjectsFromFile();
+	}
+	
+	//Metode for å hente objekter
+	private void readObjectsFromFile(){
+		try {
+			// Åpner input strøm fra fil til prog
+			FileInputStream inStream = new FileInputStream(path);
+			//Åpner strøm for lesing av objekt
+			ObjectInputStream objInStream = new ObjectInputStream(inStream);
+			
+			// Lukker strømmer
+			objInStream.close();
+			inStream.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR: filen finnes ikke");
+		} catch (IOException e) {
+			System.out.println("ERROR: feil på objectStrøm");
+		}
+		
+	}
+	
+	
+}

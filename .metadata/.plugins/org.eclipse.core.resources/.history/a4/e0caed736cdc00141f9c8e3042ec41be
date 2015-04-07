@@ -1,0 +1,12 @@
+package main;
+
+public class SkrivTilFil {
+	private String path;
+	
+	
+	//Konstruktør
+	public Skriv tilFil(String path){
+		this.path = path;
+	}
+	
+}

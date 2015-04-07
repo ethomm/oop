@@ -1,0 +1,23 @@
+package gui;
+
+import leverandoroversikt.Leverandor;
+import leverandoroversikt.LeverandorOversikt;
+
+public class EventHandler {
+
+	public
+	
+	//Skriverut LeverandørListe
+	public static void updateLeverandor(){
+		MainFrame.getCbLeverandorPattedyrReptil().removeAllItems();
+		for (Leverandor lev: LeverandorOversikt.hentLeverandorer()){
+			MainFrame.getCbLeverandorPattedyrReptil().addItem(lev);
+		}
+	}
+
+	public static void LeggTilVarerVisible() {
+		MainFrame.getLeggTilVare().setVisible(true);
+		
+	}
+	
+}

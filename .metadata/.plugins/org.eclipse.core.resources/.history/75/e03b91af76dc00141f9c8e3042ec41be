@@ -1,0 +1,48 @@
+package kundeoversikt;
+import java.util.ArrayList;
+
+import main.SkrivTilFil;
+import varelager.Produkt;
+
+public class KundeOversikt {
+
+	private static ArrayList<Kunde> kundeListe = new ArrayList<Kunde>();
+	
+	//Metode som lar oss legge til nye Kunder i listen kundeListe. Dette blir da vår Setter
+	public static void leggTilKunde(String forNavn, String etterNavn, String telefon, String adresse, String postnr, String poststed) {
+	 
+	kundeListe.add(new Kunde(forNavn, etterNavn, telefon, adresse, postnr, poststed));
+	
+	//Lagrer kundenlisten i filen kunde.ser
+	LagrerKunder();
+
+	} 
+	
+	// Lager en enkel gettermetode for kundelisten
+	public static ArrayList<Kunde> getKundeListe(){
+		 return kundeListe;
+	}
+
+	// Metode for å hente enkelt kunde basert på kundenr(telefonnr)
+	public static Kunde hentKunde(String kundeNr) {
+	
+		for(Kunde k: kundeListe) {
+			if(k.getTlf() == kundeNr) {
+				return k;
+			}
+		}
+		return null;
+	}
+	
+	//Lagre funksjon som skriver til serialiserte filer
+	public static void LagrerKunder(){
+		//oppretter en objektListe av KundeListen
+		ArrayList<Object> objKundeListe = new ArrayList<>();
+		for(Kunde k : kundeListe){
+			objKundeListe.add(k);
+		}
+		
+		new SkrivTilFil("kundeoversikt.kunde.ser", objKundeListe);
+	}
+	
+}

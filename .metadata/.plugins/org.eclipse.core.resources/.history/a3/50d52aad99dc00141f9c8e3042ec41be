@@ -1,0 +1,207 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JLabel;
+
+import java.awt.Font;
+
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+
+import leverandoroversikt.Leverandor;
+import leverandoroversikt.LeverandorOversikt;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+
+public class MainFrame extends JFrame {
+
+	private JPanel vindu;
+	private JTextField txtProduktNavnPattedyrReptil;
+	private JTextField txtProduktArtsNavnPattedyrReptil;
+	private JTextField txtProduktSleksNavnPattedyrReptil;
+	private JTextField txtPrisInnPattedyrReptil;
+	private JTextField txtPrisUtPattedyrReptil;
+	private JPanel LeggTilVare;
+	private JComboBox cbTypeProdukt;
+	private JPanel panelPattedyrReptil;
+	private JComboBox cbLeverandorPattedyrReptil ;
+
+
+	/**
+	 * Create the frame.
+	 */
+	public MainFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1178, 567);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnLeggTil = new JMenu("Legg til");
+		menuBar.add(mnLeggTil);
+		
+		JMenuItem mntmProdukt = new JMenuItem("Produkt");
+		mntmProdukt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Når produkter klikkes
+				//Alle andre Vinduer lukkes
+				//Når denne klikkes Åpnes vinduet med å legge til Produkter			
+				LeggTilVare.setVisible(true);
+			}
+		});
+		mnLeggTil.add(mntmProdukt);
+		
+		JMenuItem mntmKunde = new JMenuItem("Kunde");
+		mnLeggTil.add(mntmKunde);
+		
+		JMenuItem mntmLeverandr = new JMenuItem("Leverandør");
+		mnLeggTil.add(mntmLeverandr);
+		vindu = new JPanel();
+		vindu.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(vindu);
+		vindu.setLayout(null);
+		
+		LeggTilVare = new JPanel();
+		LeggTilVare.setBounds(5, 5, 332, 512);
+		vindu.add(LeggTilVare);
+		LeggTilVare.setLayout(null);
+		//Setter Panelet til ikke Synlig
+		LeggTilVare.setVisible(false);
+		
+		JLabel lblLeggTilVare = new JLabel("Legg til produkt:");
+		lblLeggTilVare.setFont(new Font("Helvetica", Font.PLAIN, 16));
+		lblLeggTilVare.setBounds(6, 6, 132, 25);
+		LeggTilVare.add(lblLeggTilVare);
+		
+		cbTypeProdukt = new JComboBox();
+		cbTypeProdukt.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				//Ser hva som er valgt i Comboboxen med Valg av type produkt som skal legges til
+				String type = (String) cbTypeProdukt.getSelectedItem();
+				
+				if(type == "Pattedyr" || type =="reptil"){
+					panelPattedyrReptil.setVisible(true);
+					}
+			}
+		});
+		cbTypeProdukt.setToolTipText("Velg Type Produkt");
+		cbTypeProdukt.setBounds(194, 56, 132, 27);
+		LeggTilVare.add(cbTypeProdukt);
+		
+		//Legger inn valg for produkter slik at riktig ramme med valg kommer opp
+		cbTypeProdukt.addItem("Velg Type Produkt");
+		cbTypeProdukt.addItem("Fisk");
+		cbTypeProdukt.addItem("Pattedyr");
+		cbTypeProdukt.addItem("Reptil");
+		cbTypeProdukt.addItem("AnnetProdukt");
+		
+		JLabel lblVelgProduktDu = new JLabel("Velg type produkt å legge til:");
+		lblVelgProduktDu.setBounds(6, 60, 187, 16);
+		LeggTilVare.add(lblVelgProduktDu);
+		
+		
+		/*Her starter panelet som håndterer Inputt for Pattedyr og Reptiler
+		 * 
+		*/
+		panelPattedyrReptil = new JPanel();
+		panelPattedyrReptil.setBounds(0, 88, 332, 424);
+		LeggTilVare.add(panelPattedyrReptil);
+		panelPattedyrReptil.setLayout(null);
+		panelPattedyrReptil.setVisible(false);
+		
+		JLabel lblNavn = new JLabel("Navn:");
+		lblNavn.setBounds(6, 12, 61, 16);
+		panelPattedyrReptil.add(lblNavn);
+		
+		JLabel lblArtsnavn = new JLabel("Artsnavn:");
+		lblArtsnavn.setBounds(6, 52, 61, 16);
+		panelPattedyrReptil.add(lblArtsnavn);
+		
+		JLabel lblSlektsnavn = new JLabel("Slektsnavn:");
+		lblSlektsnavn.setBounds(6, 92, 96, 16);
+		panelPattedyrReptil.add(lblSlektsnavn);
+		
+		JLabel lblLeverandor = new JLabel("Leverandor:");
+		lblLeverandor.setBounds(6, 131, 113, 16);
+		panelPattedyrReptil.add(lblLeverandor);
+		
+		JLabel lblPrisInn = new JLabel("Pris inn:");
+		lblPrisInn.setBounds(6, 172, 61, 16);
+		panelPattedyrReptil.add(lblPrisInn);
+		
+		JLabel lblSalgspris = new JLabel("Salgspris:");
+		lblSalgspris.setBounds(6, 212, 82, 16);
+		panelPattedyrReptil.add(lblSalgspris);
+		
+		JLabel lblProduktbeskrivelse = new JLabel("ProduktBeskrivelse:");
+		lblProduktbeskrivelse.setBounds(6, 247, 141, 16);
+		panelPattedyrReptil.add(lblProduktbeskrivelse);
+		
+		txtProduktNavnPattedyrReptil = new JTextField();
+		txtProduktNavnPattedyrReptil.setBounds(135, 6, 191, 28);
+		panelPattedyrReptil.add(txtProduktNavnPattedyrReptil);
+		txtProduktNavnPattedyrReptil.setColumns(10);
+		
+		txtProduktArtsNavnPattedyrReptil = new JTextField();
+		txtProduktArtsNavnPattedyrReptil.setBounds(135, 46, 191, 28);
+		panelPattedyrReptil.add(txtProduktArtsNavnPattedyrReptil);
+		txtProduktArtsNavnPattedyrReptil.setColumns(10);
+		
+		txtProduktSleksNavnPattedyrReptil = new JTextField();
+		txtProduktSleksNavnPattedyrReptil.setBounds(135, 86, 191, 28);
+		panelPattedyrReptil.add(txtProduktSleksNavnPattedyrReptil);
+		txtProduktSleksNavnPattedyrReptil.setColumns(10);
+		
+		cbLeverandorPattedyrReptil = new JComboBox();
+		cbLeverandorPattedyrReptil.setBounds(131, 127, 195, 27);
+		panelPattedyrReptil.add(cbLeverandorPattedyrReptil);
+		
+		//Henter Listen over leverandører
+		updateLeverandor();
+		
+		txtPrisInnPattedyrReptil = new JTextField();
+		txtPrisInnPattedyrReptil.setBounds(192, 166, 134, 28);
+		panelPattedyrReptil.add(txtPrisInnPattedyrReptil);
+		txtPrisInnPattedyrReptil.setColumns(10);
+		
+		txtPrisUtPattedyrReptil = new JTextField();
+		txtPrisUtPattedyrReptil.setBounds(192, 206, 134, 28);
+		panelPattedyrReptil.add(txtPrisUtPattedyrReptil);
+		txtPrisUtPattedyrReptil.setColumns(10);
+		
+		JTextArea txtProduktBeskrivelsePattedyrReptil = new JTextArea();
+		txtProduktBeskrivelsePattedyrReptil.setLineWrap(true);
+		txtProduktBeskrivelsePattedyrReptil.setBounds(5, 270, 320, 95);
+		panelPattedyrReptil.add(txtProduktBeskrivelsePattedyrReptil);
+		
+		JButton btnLeggTilProdukt = new JButton("Legg til");
+		btnLeggTilProdukt.setBounds(209, 385, 117, 29);
+		panelPattedyrReptil.add(btnLeggTilProdukt);
+		
+		JButton btnAvbrytProduktPattedyrReptil = new JButton("Avbryt");
+		btnAvbrytProduktPattedyrReptil.setBounds(90, 385, 117, 29);
+		panelPattedyrReptil.add(btnAvbrytProduktPattedyrReptil);
+	}
+	
+	//oppdaterer leverandørlise
+		private void updateLeverandor(){
+			cbLeverandorPattedyrReptil.removeAllItems();
+			for (Leverandor lev: LeverandorOversikt.hentLeverandorer()){
+				cbLeverandorPattedyrReptil.addItem(lev);
+			}
+		}
+	
+}

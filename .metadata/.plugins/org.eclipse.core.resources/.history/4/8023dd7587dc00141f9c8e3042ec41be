@@ -1,0 +1,64 @@
+package main;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+import salgsoversikt.Salg;
+import salgsoversikt.SalgsOversikt;
+import varelager.Produkt;
+import varelager.VareLager;
+import kundeoversikt.Kunde;
+import kundeoversikt.KundeOversikt;
+import leverandoroversikt.Leverandor;
+import leverandoroversikt.LeverandorOversikt;
+
+public class LesFraFil {
+
+	private String path;
+	
+	//Konstruktøren
+	public LesFraFil(String path){
+		this.path = path;	
+		readObjectsFromFile();
+	}
+	
+	//Metode for å hente objekter
+	private void readObjectsFromFile(){
+		try {
+			// Åpner input strøm fra fil til prog
+			FileInputStream inStream = new FileInputStream(path);
+			//Åpner strøm for lesing av objekt
+			ObjectInputStream objInStream = new ObjectInputStream(inStream);
+			
+			Object o = null;
+			
+			//Går igjennom alle objektne i filen og sorterer til respektive lister
+			
+			while((o = objInStream.readObject()) !=null){
+				if(o instanceof Object){
+					KundeOversikt.getKundeListe().add((Kunde) o);
+				}
+				else
+				{
+					System.out.println("ERROR: mangler classe i objekt");
+				}
+			
+			}		
+			//Lukker strømmer
+			objInStream.close();
+			inStream.close();
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR: filen finnes ikke for lesing");
+		} catch (IOException e) {
+			System.out.println("ERROR: feil på objectStrøm");
+		} catch (ClassNotFoundException e) {
+			 System.out.println("ERROR: ingen flere objekter å lese");
+		}
+		
+	}
+	
+	
+}

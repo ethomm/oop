@@ -7,6 +7,7 @@ import javax.management.timer.Timer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JButton;
@@ -63,7 +64,18 @@ public class MainFrame extends JFrame {
 	 */
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 673, 426);
+		setBounds(100, 100, 680, 450);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+		
+		JMenuItem mnLagre = new JMenuItem("Lagre");
+		mnFile.add(mnLagre);
+		
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -258,7 +270,7 @@ public class MainFrame extends JFrame {
 				new Leverandor(navn, ePost, adr, pSted, tlf);
 				updateLev();
 				panLeverandor.setVisible(false);
-				advarsel("Du har lagt til en ny Leverand¿r");
+				advarsel("Du har lagt til en ny Leverandï¿½r");
 				tfLNavn.setText("");
 				tfLEpost.setText("");
 				tfLAdresse.setText("");
@@ -350,17 +362,19 @@ public class MainFrame extends JFrame {
 		JButton btnPattedyr = new JButton("Pattedyr");
 		btnPattedyr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//T¿mmer advarselfeltet
+				//Tï¿½mmer advarselfeltet
 				tomadvarsel();
 				//Setter sin jukse boolean til sann
 				pattedyr = true;
-				//T¿m Listen vareliste 
+				fisk = false;
+				reptil = false;
+				//Tï¿½m Listen vareliste 
 				cbVareliste.removeAllItems();
-				//nŒr klikket hent liste
+				//nï¿½r klikket hent liste
 				for (Pattedyr p: Pattedyr.getPattedyrliste()){
 					cbVareliste.addItem(p);
 				}
-				//nŒr klikket gj¿r liste synlig sammen med selgknapp
+				//nï¿½r klikket gjï¿½r liste synlig sammen med selgknapp
 				cbVareliste.setVisible(true);
 				btnSelg.setVisible(true);
 			}
@@ -371,17 +385,19 @@ public class MainFrame extends JFrame {
 		JButton btnReptil = new JButton("Reptil");
 		btnReptil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//T¿mmer advarselfeltet
+				//Tï¿½mmer advarselfeltet
 				tomadvarsel();
 				//Setter sin jukse boolean til sann
 				reptil = true;
-				//T¿m Listen vareliste 
+				fisk = false;
+				pattedyr = false;
+				//Tï¿½m Listen vareliste 
 				cbVareliste.removeAllItems();
-				//nŒr klikket hent liste
+				//nï¿½r klikket hent liste
 				for(Reptil r: Reptil.getReptilliste()){
 					cbVareliste.addItem(r);
 				}
-				//nŒr klikket gj¿r liste synlig sammen med selgknapp
+				//nï¿½r klikket gjï¿½r liste synlig sammen med selgknapp
 				cbVareliste.setVisible(true);
 				btnSelg.setVisible(true);
 				
@@ -393,17 +409,19 @@ public class MainFrame extends JFrame {
 		JButton btnFisk = new JButton("Fisk");
 		btnFisk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//T¿mmer advarselfeltet
+				//Tï¿½mmer advarselfeltet
 				tomadvarsel();
 				//Setter sin jukse boolean til sann
 				fisk = true;
-				//T¿m Listen vareliste
+				pattedyr = false;
+				reptil = false;
+				//Tï¿½m Listen vareliste
 				cbVareliste.removeAllItems();
-				//nŒr klikket hent liste
+				//nï¿½r klikket hent liste
 				for (Fisk f: Fisk.getFiskeliste()){
 					cbVareliste.addItem(f);
 				}
-				//nŒr klikket gj¿r liste synlig sammen med selgknapp
+				//nï¿½r klikket gjï¿½r liste synlig sammen med selgknapp
 				cbVareliste.setVisible(true);
 				btnSelg.setVisible(true);
 			}
@@ -421,7 +439,7 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Class<? extends Object> salg = cbVareliste.getSelectedItem().getClass();
 				String navn = salg.getName();
-				//Kj¿r selg skriptet
+				//Kjï¿½r selg skriptet
 				if(fisk == true){
 					Fisk f = (Fisk)cbVareliste.getSelectedItem();
 					f.selg(navn);
@@ -457,7 +475,7 @@ public class MainFrame extends JFrame {
 		lblAdvarsel.setText("");
 	}
 	
-	//oppdaterer leverand¿rlise
+	//oppdaterer leverandï¿½rlise
 	private void updateLev(){
 		LevBoks.removeAllItems();
 		for (Leverandor l: Leverandor.getLeverandorliste()){

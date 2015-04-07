@@ -1,0 +1,43 @@
+package main;
+
+import gui.MainFrame;
+
+import java.awt.EventQueue;
+
+import varelager.VareLager;
+import kundeoversikt.Kunde;
+import kundeoversikt.KundeOversikt;
+import leverandoroversikt.Leverandor;
+import leverandoroversikt.LeverandorOversikt;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				//Leser inn all lagret data
+				new LesFraFil("/Users/EirikThommessen/Documents/Studier/V2015/oop/Oppgave 7/kunde.ser");
+				new LesFraFil("/Oppgave_7/varelager.ser");
+				new LesFraFil("/Oppgave_7/leverandor.ser");
+				//new LesFraFil("salg.ser");
+				
+				try {
+					MainFrame frame = new MainFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+	
+		System.out.println(LeverandorOversikt.hentLeverandorer());
+		
+		
+		System.out.println(VareLager.hentAlleProdukter());
+		System.out.println(KundeOversikt.hentKunde("1234"));
+		System.out.println(KundeOversikt.hentKunde("9978897"));
+	}
+
+}
