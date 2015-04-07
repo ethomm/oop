@@ -25,6 +25,11 @@ public class AnnetProdukt extends Produkt implements Serializable{
 		this.antAvTypeAnnetProdukt = antAvTypeAnnetProdukt;
 	}
 
+	@Override
+	
+	public String toString(){
+		return super.getNavn()+ "- Forbruksartikkel - " + this.getAntAvTypeAnnetProdukt() + " stk.";
+	}
 
 	
 	

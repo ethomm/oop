@@ -1,0 +1,812 @@
+package gui;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.DefaultListModel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JLabel;
+
+import java.awt.Font;
+
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+
+import varelager.VareLager;
+import leverandoroversikt.Leverandor;
+import model.Student;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+
+import javax.swing.JList;
+
+import java.awt.List;
+import java.awt.Color;
+
+public class Gui extends JFrame {
+
+
+	/**
+	 * 
+	 */
+	
+	private static final long serialVersionUID = -6076288242142071925L;
+	private JPanel vindu;
+	private JTextField txtProduktNavn;
+	private JTextField txtProduktArtsNavn;
+	private JTextField txtProduktSleksNavn;
+	private JTextField txtPrisInn;
+	private JTextField txtPrisUt;
+	public JPanel LeggTilVare;
+	private JComboBox<String> cbTypeProdukt;
+	public JPanel panelPattedyrReptil;
+	private JComboBox<Leverandor> cbLeverandor;
+	private JTextField txtAntallAvProdukt;
+	private JLabel lblArtsnavn;
+	private JLabel lblSlektsnavn;
+	private JLabel lblAntall;
+	private JLabel lblProduktAdvarsel;
+	public JPanel LeggTilKunde;
+	private JLabel lblLeggTilKunde;
+	private JLabel lblFornavn;
+	private JLabel lblEtternavn;
+	private JLabel lblTelefonnr;
+	private JLabel lblAdr;
+	private JLabel lblPostnr;
+	private JLabel lblPoststed;
+	private JTextField txtKundeFornavn;
+	private JTextField txtKundeEtternavn;
+	private JTextField txtKundeTlf;
+	private JTextField txtKundeAdresse;
+	private JTextField txtKundePostnr;
+	private JTextField txtKundePoststed;
+	private JButton btnLeggTilKunde;
+	private JButton btnAvbrytLeggTilKunde;
+	private JLabel lblAdvarselLagtTilKunde;
+	public JPanel LeggTilLeverandor;
+	private JLabel lblNewLabel;
+	private JLabel lblNavn_1;
+	private JLabel lblSelger;
+	private JLabel lblEpost;
+	private JLabel lblKontonr;
+	private JLabel lblKundenummer;
+	private JLabel lblTelefon;
+	private JLabel lblAdresse;
+	private JLabel lblPostnr_1;
+	private JLabel lblPoststed_1;
+	private JTextField txtLeverandorNavn;
+	private JTextField txtLeverandorSelger;
+	private JTextField txtLeverandorKontonr;
+	private JTextField txtLeverandorKundeNr;
+	private JTextField txtLeverandorTlf;
+	private JTextField txtLeverandorAdresse;
+	private JTextField txtLeverandorPostNr;
+	private JTextField txtLeverandorPoststed;
+	private JLabel lblAdvarselLeverandor;
+	private JTextField txtLeverandorEpost;
+	private JButton btnLeggTilLeverandor;
+	private JButton btnAvbrytLeverandor;
+	private JButton btnLeggTilProdukt;
+	private JButton btnAvbrytProdukt;
+	private JTextArea txtProduktBeskrivelse;
+	private JMenuItem mntmKunde;
+	private JMenuItem mntmLeverandr;
+	private JMenuItem mntmProdukt;
+	public JPanel VareLagerOversikt;
+	private JLabel lblVarelager;
+	private JMenu mnOversikter;
+	private JMenuItem mntmVarelager;
+	private JMenuItem mntmSalgsOversikt;
+	private JMenuItem mntmKundeOversikt;
+	private List listeVarelager; 
+
+	
+
+	/**
+	 * Create the frame.
+	 */
+	public Gui() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1178, 567);
+
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnLeggTil = new JMenu("Legg til");
+		menuBar.add(mnLeggTil);
+		
+		mnOversikter = new JMenu("Oversikter");
+		menuBar.add(mnOversikter);
+
+		mntmVarelager = new JMenuItem("Varelager");
+		mnOversikter.add(mntmVarelager);
+		
+		mntmSalgsOversikt = new JMenuItem("Salgsoversikt");
+		mnOversikter.add(mntmSalgsOversikt);
+		
+		mntmKundeOversikt = new JMenuItem("Kundeoversikt");
+		mnOversikter.add(mntmKundeOversikt);
+		
+		
+		mntmProdukt = new JMenuItem("Produkt");
+		mnLeggTil.add(mntmProdukt);
+
+		mntmKunde = new JMenuItem("Kunde");
+		mnLeggTil.add(mntmKunde);
+
+		mntmLeverandr = new JMenuItem("Leverandør");
+		mnLeggTil.add(mntmLeverandr);
+		vindu = new JPanel();
+		vindu.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(vindu);
+		vindu.setLayout(null);
+
+		LeggTilVare = new JPanel();
+		LeggTilVare.setBounds(5, 5, 332, 512);
+		vindu.add(LeggTilVare);
+		LeggTilVare.setLayout(null);
+		// Setter Panelet til ikke Synlig
+		LeggTilVare.setVisible(false);
+
+		JLabel lblLeggTilVare = new JLabel("Legg til produkt:");
+		lblLeggTilVare.setFont(new Font("Helvetica", Font.PLAIN, 16));
+		lblLeggTilVare.setBounds(6, 6, 132, 25);
+		LeggTilVare.add(lblLeggTilVare);
+		
+		cbTypeProdukt = new JComboBox<String>();
+		cbTypeProdukt.setToolTipText("Velg Type Produkt");
+		cbTypeProdukt.setBounds(194, 56, 132, 27);
+		LeggTilVare.add(cbTypeProdukt);
+
+		// Legger inn valg for produkter slik at riktig ramme med valg kommer
+		// opp
+		cbTypeProdukt.addItem("Velg Type Produkt");
+		cbTypeProdukt.addItem("Fisk");
+		cbTypeProdukt.addItem("Pattedyr");
+		cbTypeProdukt.addItem("Reptil");
+		cbTypeProdukt.addItem("Annet Produkt");
+
+		JLabel lblVelgProduktDu = new JLabel("Velg type produkt å legge til:");
+		lblVelgProduktDu.setBounds(6, 60, 187, 16);
+		LeggTilVare.add(lblVelgProduktDu);
+
+		/*
+		 * Her starter panelet som håndterer Inputt for Produkter
+		 */
+		panelPattedyrReptil = new JPanel();
+		panelPattedyrReptil.setBounds(0, 88, 332, 424);
+		LeggTilVare.add(panelPattedyrReptil);
+		panelPattedyrReptil.setLayout(null);
+		panelPattedyrReptil.setVisible(false);
+
+		JLabel lblNavn = new JLabel("Navn:");
+		lblNavn.setBounds(6, 12, 61, 16);
+		panelPattedyrReptil.add(lblNavn);
+
+		lblArtsnavn = new JLabel("Artsnavn:");
+		lblArtsnavn.setBounds(6, 40, 61, 16);
+		panelPattedyrReptil.add(lblArtsnavn);
+
+		lblSlektsnavn = new JLabel("Slektsnavn:");
+		lblSlektsnavn.setBounds(6, 68, 96, 16);
+		panelPattedyrReptil.add(lblSlektsnavn);
+
+		lblAntall = new JLabel("Antall:");
+		lblAntall.setBounds(6, 103, 61, 16);
+		panelPattedyrReptil.add(lblAntall);
+
+		lblProduktAdvarsel = new JLabel("");
+		lblProduktAdvarsel.setBounds(6, 351, 299, 23);
+		panelPattedyrReptil.add(lblProduktAdvarsel);
+
+		JLabel lblLeverandor = new JLabel("Leverandor:");
+		lblLeverandor.setBounds(6, 131, 113, 16);
+		panelPattedyrReptil.add(lblLeverandor);
+
+		JLabel lblPrisInn = new JLabel("Pris inn:");
+		lblPrisInn.setBounds(6, 172, 61, 16);
+		panelPattedyrReptil.add(lblPrisInn);
+
+		JLabel lblSalgspris = new JLabel("Salgspris:");
+		lblSalgspris.setBounds(6, 212, 82, 16);
+		panelPattedyrReptil.add(lblSalgspris);
+
+		JLabel lblProduktbeskrivelse = new JLabel("ProduktBeskrivelse:");
+		lblProduktbeskrivelse.setBounds(6, 247, 141, 16);
+		panelPattedyrReptil.add(lblProduktbeskrivelse);
+
+		txtProduktNavn = new JTextField();
+		txtProduktNavn.setBounds(135, 6, 191, 28);
+		panelPattedyrReptil.add(txtProduktNavn);
+		txtProduktNavn.setColumns(10);
+
+		txtProduktArtsNavn = new JTextField();
+		txtProduktArtsNavn.setBounds(135, 35, 191, 28);
+		panelPattedyrReptil.add(txtProduktArtsNavn);
+		txtProduktArtsNavn.setColumns(10);
+
+		txtProduktSleksNavn = new JTextField();
+		txtProduktSleksNavn.setBounds(135, 62, 191, 28);
+		panelPattedyrReptil.add(txtProduktSleksNavn);
+		txtProduktSleksNavn.setColumns(10);
+
+		txtAntallAvProdukt = new JTextField();
+		txtAntallAvProdukt.setBounds(249, 97, 77, 28);
+		panelPattedyrReptil.add(txtAntallAvProdukt);
+		txtAntallAvProdukt.setColumns(10);
+
+		cbLeverandor = new JComboBox();
+		cbLeverandor.setBounds(131, 127, 195, 27);
+		panelPattedyrReptil.add(cbLeverandor);
+
+		// Henter Listen over leverandører
+
+		txtPrisInn = new JTextField();
+		txtPrisInn.setBounds(192, 166, 134, 28);
+		panelPattedyrReptil.add(txtPrisInn);
+		txtPrisInn.setColumns(10);
+
+		txtPrisUt = new JTextField();
+		txtPrisUt.setBounds(192, 206, 134, 28);
+		panelPattedyrReptil.add(txtPrisUt);
+		txtPrisUt.setColumns(10);
+
+		txtProduktBeskrivelse = new JTextArea();
+		txtProduktBeskrivelse.setLineWrap(true);
+		txtProduktBeskrivelse.setBounds(5, 270, 320, 69);
+		panelPattedyrReptil.add(txtProduktBeskrivelse);
+
+		btnLeggTilProdukt = new JButton("Legg til");
+		btnLeggTilProdukt.setBounds(209, 385, 117, 29);
+		panelPattedyrReptil.add(btnLeggTilProdukt);
+
+		btnAvbrytProdukt = new JButton("Avbryt");
+		btnAvbrytProdukt.setBounds(90, 385, 117, 29);
+		panelPattedyrReptil.add(btnAvbrytProdukt);
+
+		LeggTilKunde = new JPanel();
+		LeggTilKunde.setBounds(5, 5, 334, 512);
+		vindu.add(LeggTilKunde);
+		LeggTilKunde.setLayout(null);
+		LeggTilKunde.setVisible(false);
+
+		lblLeggTilKunde = new JLabel("Legg til Kunde:");
+		lblLeggTilKunde.setFont(new Font("Helvetica", Font.PLAIN, 16));
+		lblLeggTilKunde.setBounds(6, 6, 133, 25);
+		LeggTilKunde.add(lblLeggTilKunde);
+
+		lblFornavn = new JLabel("Fornavn:");
+		lblFornavn.setBounds(6, 69, 61, 16);
+		LeggTilKunde.add(lblFornavn);
+
+		lblEtternavn = new JLabel("Etternavn:");
+		lblEtternavn.setBounds(6, 116, 90, 16);
+		LeggTilKunde.add(lblEtternavn);
+
+		lblTelefonnr = new JLabel("Telefonnr:");
+		lblTelefonnr.setBounds(6, 157, 106, 16);
+		LeggTilKunde.add(lblTelefonnr);
+
+		lblAdr = new JLabel("Adresse:");
+		lblAdr.setBounds(6, 204, 61, 16);
+		LeggTilKunde.add(lblAdr);
+
+		lblPostnr = new JLabel("Postnr:");
+		lblPostnr.setBounds(6, 254, 61, 16);
+		LeggTilKunde.add(lblPostnr);
+
+		lblPoststed = new JLabel("Poststed:");
+		lblPoststed.setBounds(6, 298, 61, 16);
+		LeggTilKunde.add(lblPoststed);
+
+		txtKundeFornavn = new JTextField();
+		txtKundeFornavn.setBounds(114, 63, 196, 28);
+		LeggTilKunde.add(txtKundeFornavn);
+		txtKundeFornavn.setColumns(10);
+
+		txtKundeEtternavn = new JTextField();
+		txtKundeEtternavn.setBounds(114, 110, 196, 28);
+		LeggTilKunde.add(txtKundeEtternavn);
+		txtKundeEtternavn.setColumns(10);
+
+		txtKundeTlf = new JTextField();
+		txtKundeTlf.setBounds(176, 157, 134, 28);
+		LeggTilKunde.add(txtKundeTlf);
+		txtKundeTlf.setColumns(10);
+
+		txtKundeAdresse = new JTextField();
+		txtKundeAdresse.setBounds(114, 198, 196, 28);
+		LeggTilKunde.add(txtKundeAdresse);
+		txtKundeAdresse.setColumns(10);
+
+		txtKundePostnr = new JTextField();
+		txtKundePostnr.setBounds(220, 254, 90, 28);
+		LeggTilKunde.add(txtKundePostnr);
+		txtKundePostnr.setColumns(10);
+
+		txtKundePoststed = new JTextField();
+		txtKundePoststed.setBounds(114, 292, 196, 28);
+		LeggTilKunde.add(txtKundePoststed);
+		txtKundePoststed.setColumns(10);
+
+		btnLeggTilKunde = new JButton("Legg til kunde");
+		btnLeggTilKunde.setBounds(211, 463, 117, 29);
+		LeggTilKunde.add(btnLeggTilKunde);
+
+		btnAvbrytLeggTilKunde = new JButton("Avbryt");
+		btnAvbrytLeggTilKunde.setBounds(82, 463, 117, 29);
+		LeggTilKunde.add(btnAvbrytLeggTilKunde);
+
+		lblAdvarselLagtTilKunde = new JLabel("");
+		lblAdvarselLagtTilKunde.setBounds(6, 437, 304, 16);
+		LeggTilKunde.add(lblAdvarselLagtTilKunde);
+
+		// Her starter skjemaet for registrering av Leverandører
+
+		LeggTilLeverandor = new JPanel();
+		LeggTilLeverandor.setBounds(6, 5, 331, 512);
+		vindu.add(LeggTilLeverandor);
+		LeggTilLeverandor.setLayout(null);
+		LeggTilLeverandor.setVisible(false);
+
+		lblNewLabel = new JLabel("Legg til Leverandør:");
+		lblNewLabel.setFont(new Font("Helvetica", Font.PLAIN, 16));
+		lblNewLabel.setBounds(6, 0, 204, 32);
+		LeggTilLeverandor.add(lblNewLabel);
+
+		lblNavn_1 = new JLabel("Navn:");
+		lblNavn_1.setBounds(6, 90, 61, 16);
+		LeggTilLeverandor.add(lblNavn_1);
+
+		lblSelger = new JLabel("Selger:");
+		lblSelger.setBounds(6, 122, 61, 16);
+		LeggTilLeverandor.add(lblSelger);
+
+		lblEpost = new JLabel("Epost:");
+		lblEpost.setBounds(6, 152, 61, 16);
+		LeggTilLeverandor.add(lblEpost);
+
+		lblKontonr = new JLabel("Kontonr:");
+		lblKontonr.setBounds(6, 187, 61, 16);
+		LeggTilLeverandor.add(lblKontonr);
+
+		lblKundenummer = new JLabel("Kundenummer:");
+		lblKundenummer.setBounds(6, 226, 119, 16);
+		LeggTilLeverandor.add(lblKundenummer);
+
+		lblTelefon = new JLabel("Telefon:");
+		lblTelefon.setBounds(6, 258, 61, 16);
+		LeggTilLeverandor.add(lblTelefon);
+
+		lblAdresse = new JLabel("Adresse:");
+		lblAdresse.setBounds(6, 291, 61, 16);
+		LeggTilLeverandor.add(lblAdresse);
+
+		lblPostnr_1 = new JLabel("Postnr:");
+		lblPostnr_1.setBounds(6, 325, 61, 16);
+		LeggTilLeverandor.add(lblPostnr_1);
+
+		lblPoststed_1 = new JLabel("Poststed:");
+		lblPoststed_1.setBounds(6, 361, 61, 16);
+		LeggTilLeverandor.add(lblPoststed_1);
+
+		txtLeverandorNavn = new JTextField();
+		txtLeverandorNavn.setBounds(121, 84, 204, 28);
+		LeggTilLeverandor.add(txtLeverandorNavn);
+		txtLeverandorNavn.setColumns(10);
+
+		txtLeverandorSelger = new JTextField();
+		txtLeverandorSelger.setBounds(121, 116, 204, 28);
+		LeggTilLeverandor.add(txtLeverandorSelger);
+		txtLeverandorSelger.setColumns(10);
+
+		txtLeverandorKontonr = new JTextField();
+		txtLeverandorKontonr.setBounds(121, 181, 204, 28);
+		LeggTilLeverandor.add(txtLeverandorKontonr);
+		txtLeverandorKontonr.setColumns(10);
+
+		txtLeverandorKundeNr = new JTextField();
+		txtLeverandorKundeNr.setBounds(191, 220, 134, 28);
+		LeggTilLeverandor.add(txtLeverandorKundeNr);
+		txtLeverandorKundeNr.setColumns(10);
+
+		txtLeverandorTlf = new JTextField();
+		txtLeverandorTlf.setBounds(191, 252, 134, 28);
+		LeggTilLeverandor.add(txtLeverandorTlf);
+		txtLeverandorTlf.setColumns(10);
+
+		txtLeverandorAdresse = new JTextField();
+		txtLeverandorAdresse.setBounds(121, 286, 204, 28);
+		LeggTilLeverandor.add(txtLeverandorAdresse);
+		txtLeverandorAdresse.setColumns(10);
+
+		txtLeverandorPostNr = new JTextField();
+		txtLeverandorPostNr.setBounds(191, 319, 134, 28);
+		LeggTilLeverandor.add(txtLeverandorPostNr);
+		txtLeverandorPostNr.setColumns(10);
+
+		txtLeverandorPoststed = new JTextField();
+		txtLeverandorPoststed.setBounds(121, 355, 204, 28);
+		LeggTilLeverandor.add(txtLeverandorPoststed);
+		txtLeverandorPoststed.setColumns(10);
+
+		lblAdvarselLeverandor = new JLabel("");
+		lblAdvarselLeverandor.setBounds(6, 410, 319, 16);
+		LeggTilLeverandor.add(lblAdvarselLeverandor);
+
+		txtLeverandorEpost = new JTextField();
+		txtLeverandorEpost.setBounds(121, 146, 204, 28);
+		LeggTilLeverandor.add(txtLeverandorEpost);
+		txtLeverandorEpost.setColumns(10);
+
+		btnLeggTilLeverandor = new JButton("Legg til Leverandør");
+		btnLeggTilLeverandor.setBounds(167, 459, 158, 32);
+		LeggTilLeverandor.add(btnLeggTilLeverandor);
+
+		btnAvbrytLeverandor = new JButton("Avbryt");
+		btnAvbrytLeverandor.setBounds(38, 461, 117, 29);
+		LeggTilLeverandor.add(btnAvbrytLeverandor);
+		
+		VareLagerOversikt = new JPanel();
+		VareLagerOversikt.setBounds(349, 5, 823, 512);
+		vindu.add(VareLagerOversikt);
+		VareLagerOversikt.setLayout(null);
+		VareLagerOversikt.setVisible(false);
+		
+		lblVarelager = new JLabel("VareLager");
+		lblVarelager.setFont(new Font("Helvetica", Font.PLAIN, 16));
+		lblVarelager.setBounds(6, 6, 201, 36);
+		VareLagerOversikt.add(lblVarelager);
+		
+		listeVarelager = new JList();
+		listeVarelager.setBounds(6, 48, 306, 454);
+		VareLagerOversikt.add(listeVarelager);
+
+	}
+	
+	//Legger lytt på TypeProduktlisten
+	public void addActionToTypeProduktCb(ItemListener il){
+		cbTypeProdukt.addItemListener(il);
+	}
+	
+	//Legger lyttere til knappene
+	//Lyter for knappen "Varelager
+	public void addActionToVarelager(ActionListener al){
+		mntmVarelager.addActionListener(al);
+	}
+	
+	//Knapp for toppmenyene under "LEGG TIL"
+	//Produktknappen
+	public void addActionToProduktMbtn(ActionListener al){
+		mntmProdukt.addActionListener(al);
+	}
+	//Leverandørknappen
+	public void addActionToLeverandorMbtn(ActionListener al){
+		mntmLeverandr.addActionListener(al);
+	}
+	//Kundeknappen
+	public void addActionToKundeMbtn(ActionListener al){
+		mntmKunde.addActionListener(al);
+	}
+	
+	//Knapp for å legge til Produkter
+	public void addActionToLeggTilProdukteBtn(ActionListener al){
+		btnLeggTilProdukt.addActionListener(al);
+	}
+	//Knapp for  å avbryte produkter
+	public void addActionAvbrytProduktBtn(ActionListener al){
+		btnAvbrytProdukt.addActionListener(al);
+	}
+	// KNapp for å legge til Kunder
+	public void addActionToLeggTilKundeBtn(ActionListener al){
+		btnLeggTilKunde.addActionListener(al);
+	}
+	
+	//Knapp for avbryte kunderegistrering
+	public void addActionToAvbrytKundeBtn(ActionListener al){
+		btnAvbrytLeggTilKunde.addActionListener(al);
+	}
+	
+	//Knappen legg til Leverandor
+	public void addActionToLeggTilLeverandorBtn(ActionListener al){
+		btnLeggTilLeverandor.addActionListener(al);
+	}
+	//Knappen avbryt leverandor
+	public void addActionToAvbrytLeverandorBtn(ActionListener al){
+		btnAvbrytLeverandor.addActionListener(al);
+		}
+	
+	
+	
+	
+	//Getter og setters
+	//Gir oss tilgangang til Feltene og panelene vi trenger å jobbe med
+
+	
+	public JTextArea getTxtProduktBeskrivelse() {
+		return txtProduktBeskrivelse;
+	}
+
+	public List getListeVarelager() {
+		return listeVarelager;
+	}
+
+	public void setListeVarelager(DefaultListModel<Produkt> model) {
+		
+	}
+
+	public void setTxtProduktBeskrivelse(JTextArea txtProduktBeskrivelse) {
+		this.txtProduktBeskrivelse = txtProduktBeskrivelse;
+	}
+	
+	public JTextField getTxtProduktNavn() {
+		return txtProduktNavn;
+	}
+
+	public void setTxtProduktNavn(JTextField txtProduktNavn) {
+		this.txtProduktNavn = txtProduktNavn;
+	}
+
+	public JTextField getTxtProduktArtsNavn() {
+		return txtProduktArtsNavn;
+	}
+
+	public void setTxtProduktArtsNavn(JTextField txtProduktArtsNavn) {
+		this.txtProduktArtsNavn = txtProduktArtsNavn;
+	}
+
+	public JTextField getTxtProduktSleksNavn() {
+		return txtProduktSleksNavn;
+	}
+
+	public void setTxtProduktSleksNavn(JTextField txtProduktSleksNavn) {
+		this.txtProduktSleksNavn = txtProduktSleksNavn;
+	}
+
+	public JTextField getTxtPrisInn() {
+		return txtPrisInn;
+	}
+
+	public void setTxtPrisInn(JTextField txtPrisInn) {
+		this.txtPrisInn = txtPrisInn;
+	}
+
+	public JTextField getTxtPrisUt() {
+		return txtPrisUt;
+	}
+
+	public void setTxtPrisUt(JTextField txtPrisUt) {
+		this.txtPrisUt = txtPrisUt;
+	}
+
+	public JPanel getLeggTilVare() {
+		return LeggTilVare;
+	}
+
+	public void setLeggTilVare(JPanel leggTilVare) {
+		LeggTilVare = leggTilVare;
+	}
+
+	public JComboBox<String> getCbTypeProdukt() {
+		return cbTypeProdukt;
+	}
+
+	public void setCbTypeProdukt(JComboBox<String> cbTypeProdukt) {
+		this.cbTypeProdukt = cbTypeProdukt;
+	}
+
+	public JPanel getPanelPattedyrReptil() {
+		return panelPattedyrReptil;
+	}
+
+	public void setPanelPattedyrReptil(JPanel panelPattedyrReptil) {
+		this.panelPattedyrReptil = panelPattedyrReptil;
+	}
+
+	public JComboBox<Leverandor> getCbLeverandor() {
+		return cbLeverandor;
+	}
+
+	public void setCbLeverandor(JComboBox<Leverandor> cbLeverandor) {
+		this.cbLeverandor = cbLeverandor;
+	}
+
+	public JTextField getTxtAntallAvProdukt() {
+		return txtAntallAvProdukt;
+	}
+
+	public void setTxtAntallAvProdukt(JTextField txtAntallAvProdukt) {
+		this.txtAntallAvProdukt = txtAntallAvProdukt;
+	}
+
+	public JLabel getLblArtsnavn() {
+		return lblArtsnavn;
+	}
+
+	public void setLblArtsnavn(JLabel lblArtsnavn) {
+		this.lblArtsnavn = lblArtsnavn;
+	}
+
+	public JLabel getLblSlektsnavn() {
+		return lblSlektsnavn;
+	}
+
+	public void setLblSlektsnavn(JLabel lblSlektsnavn) {
+		this.lblSlektsnavn = lblSlektsnavn;
+	}
+
+	public JLabel getLblAntall() {
+		return lblAntall;
+	}
+
+	public void setLblAntall(JLabel lblAntall) {
+		this.lblAntall = lblAntall;
+	}
+
+	public JLabel getLblProduktAdvarsel() {
+		return lblProduktAdvarsel;
+	}
+
+	public void setLblProduktAdvarsel(JLabel lblProduktAdvarsel) {
+		this.lblProduktAdvarsel = lblProduktAdvarsel;
+	}
+
+	public JPanel getLeggTilKunde() {
+		return LeggTilKunde;
+	}
+
+	public void setLeggTilKunde(JPanel leggTilKunde) {
+		LeggTilKunde = leggTilKunde;
+	}
+
+	public JTextField getTxtKundeFornavn() {
+		return txtKundeFornavn;
+	}
+
+	public void setTxtKundeFornavn(JTextField txtKundeFornavn) {
+		this.txtKundeFornavn = txtKundeFornavn;
+	}
+
+	public JTextField getTxtKundeEtternavn() {
+		return txtKundeEtternavn;
+	}
+
+	public void setTxtKundeEtternavn(JTextField txtKundeEtternavn) {
+		this.txtKundeEtternavn = txtKundeEtternavn;
+	}
+
+	public JTextField getTxtKundeTlf() {
+		return txtKundeTlf;
+	}
+
+	public void setTxtKundeTlf(JTextField txtKundeTlf) {
+		this.txtKundeTlf = txtKundeTlf;
+	}
+
+	public JTextField getTxtKundeAdresse() {
+		return txtKundeAdresse;
+	}
+
+	public void setTxtKundeAdresse(JTextField txtKundeAdresse) {
+		this.txtKundeAdresse = txtKundeAdresse;
+	}
+
+	public JTextField getTxtKundePostnr() {
+		return txtKundePostnr;
+	}
+
+	public void setTxtKundePostnr(JTextField txtKundePostnr) {
+		this.txtKundePostnr = txtKundePostnr;
+	}
+
+	public JTextField getTxtKundePoststed() {
+		return txtKundePoststed;
+	}
+
+	public void setTxtKundePoststed(JTextField txtKundePoststed) {
+		this.txtKundePoststed = txtKundePoststed;
+	}
+
+	public JLabel getLblAdvarselLagtTilKunde() {
+		return lblAdvarselLagtTilKunde;
+	}
+
+	public void setLblAdvarselLagtTilKunde(JLabel lblAdvarselLagtTilKunde) {
+		this.lblAdvarselLagtTilKunde = lblAdvarselLagtTilKunde;
+	}
+
+	public JPanel getLeggTilLeverandor() {
+		return LeggTilLeverandor;
+	}
+
+	public void setLeggTilLeverandor(JPanel leggTilLeverandor) {
+		LeggTilLeverandor = leggTilLeverandor;
+	}
+
+	public JTextField getTxtLeverandorNavn() {
+		return txtLeverandorNavn;
+	}
+
+	public void setTxtLeverandorNavn(JTextField txtLeverandorNavn) {
+		this.txtLeverandorNavn = txtLeverandorNavn;
+	}
+
+	public JTextField getTxtLeverandorSelger() {
+		return txtLeverandorSelger;
+	}
+
+	public void setTxtLeverandorSelger(JTextField txtLeverandorSelger) {
+		this.txtLeverandorSelger = txtLeverandorSelger;
+	}
+
+	public JTextField getTxtLeverandorKontonr() {
+		return txtLeverandorKontonr;
+	}
+
+	public void setTxtLeverandorKontonr(JTextField txtLeverandorKontonr) {
+		this.txtLeverandorKontonr = txtLeverandorKontonr;
+	}
+
+	public JTextField getTxtLeverandorKundeNr() {
+		return txtLeverandorKundeNr;
+	}
+
+	public void setTxtLeverandorKundeNr(JTextField txtLeverandorKundeNr) {
+		this.txtLeverandorKundeNr = txtLeverandorKundeNr;
+	}
+
+	public JTextField getTxtLeverandorTlf() {
+		return txtLeverandorTlf;
+	}
+
+	public void setTxtLeverandorTlf(JTextField txtLeverandorTlf) {
+		this.txtLeverandorTlf = txtLeverandorTlf;
+	}
+
+	public JTextField getTxtLeverandorAdresse() {
+		return txtLeverandorAdresse;
+	}
+
+	public void setTxtLeverandorAdresse(JTextField txtLeverandorAdresse) {
+		this.txtLeverandorAdresse = txtLeverandorAdresse;
+	}
+
+	public JTextField getTxtLeverandorPostNr() {
+		return txtLeverandorPostNr;
+	}
+
+	public void setTxtLeverandorPostNr(JTextField txtLeverandorPostNr) {
+		this.txtLeverandorPostNr = txtLeverandorPostNr;
+	}
+
+	public JTextField getTxtLeverandorPoststed() {
+		return txtLeverandorPoststed;
+	}
+
+	public void setTxtLeverandorPoststed(JTextField txtLeverandorPoststed) {
+		this.txtLeverandorPoststed = txtLeverandorPoststed;
+	}
+
+	public JLabel getLblAdvarselLeverandor() {
+		return lblAdvarselLeverandor;
+	}
+
+	public void setLblAdvarselLeverandor(JLabel lblAdvarselLeverandor) {
+		this.lblAdvarselLeverandor = lblAdvarselLeverandor;
+	}
+
+	public JTextField getTxtLeverandorEpost() {
+		return txtLeverandorEpost;
+	}
+
+	public void setTxtLeverandorEpost(JTextField txtLeverandorEpost) {
+		this.txtLeverandorEpost = txtLeverandorEpost;
+	}
+}

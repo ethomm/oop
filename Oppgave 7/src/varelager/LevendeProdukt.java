@@ -1,9 +1,15 @@
 package varelager;
 
+import java.io.Serializable;
+
 import leverandoroversikt.Leverandor;
 
-public class LevendeProdukt extends Produkt {
+public class LevendeProdukt extends Produkt implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6207772060005772915L;
 	private String slektsnavn;
 	private String artsnavn;
 	
@@ -14,7 +20,12 @@ public class LevendeProdukt extends Produkt {
 		this.slektsnavn = slektsnavn;
 		this.artsnavn = artsnavn;
 	}
-
+	
+	@Override
+	public String toString(){
+		return super.getNavn() + " -  " + this.getArtsnavn();
+	}
+	
 	public String getSlektsnavn() {
 		return slektsnavn;
 	}

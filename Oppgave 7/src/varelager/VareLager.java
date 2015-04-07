@@ -49,6 +49,50 @@ public class VareLager {
 		return produktListe;
 		
 	}
+	//Metode som regner antall varer
+	
+	//Antall pattedyr
+	public static int getAntallPattedyr(){
+		int pattedyr = 0;
+		for (Produkt prod : produktListe) {
+			if(prod instanceof Pattedyr){
+				pattedyr++;
+			}	
+		}
+		return pattedyr;
+	}
+	
+	//Antall reptiler
+	public static int getAntallReptiler(){
+		int reptiler = 0;
+		for (Produkt prod : produktListe) {
+			if(prod instanceof Reptil){
+				reptiler++;
+			}	
+		}
+		return reptiler;
+	}
+	//Antall Fisker
+	public static int getAntallFisk(){
+		int fisk = 0;
+		for (Produkt prod : produktListe) {
+			if(prod instanceof Fisk){
+				fisk += ((Fisk) prod).getAntAvTypeAnnetProdukt();
+						}	
+		}
+		return fisk;
+	}
+	//Antall av Andre produkter
+	public static int getAntallAndreProdukter(){
+		int fisk = 0;
+		for (Produkt prod : produktListe) {
+			if(prod instanceof AnnetProdukt){
+				fisk += ((AnnetProdukt) prod).getAntAvTypeAnnetProdukt();
+						}	
+		}
+		return fisk;
+	}
+	
 	
 	//Lagre funksjon som skriver til serialiserte filer
 	public static void LagrerVarer(){
@@ -60,6 +104,5 @@ public class VareLager {
 		
 		new SkrivTilFil("varelager.ser", objProduktListe);
 	}
-	
-	
+
 }

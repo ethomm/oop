@@ -1,0 +1,42 @@
+package main;
+
+import gui.MainFrame;
+
+import java.awt.EventQueue;
+
+import varelager.VareLager;
+import kundeoversikt.Kunde;
+import kundeoversikt.KundeOversikt;
+import leverandoroversikt.Leverandor;
+import leverandoroversikt.LeverandorOversikt;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				//Leser inn all lagret data
+				new LesFraFil(System.getProperty("user.dir")+"/kunde.ser");
+				new LesFraFil(System.getProperty("user.dir")+"/varelager.ser");
+				new LesFraFil(System.getProperty("user.dir")+"/leverandor.ser");
+				//new LesFraFil("salg.ser");
+				
+				try {
+					MainFrame frame = new MainFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		
+		System.out.println();
+		//LeverandorOversikt.leggTilLeverandor("Pedegree", "Arnt Ove", "artove@peddegree.no", "23423423452", "23432", "23423423", "Butikkveien", "1257", "Oslo");
+		//KundeOversikt.leggTilKunde("Janina", "martinsen", "1234", "veverbakken 1", "123", "moss");
+		//KundeOversikt.leggTilKunde("Eirik", "Thommessen", "9978897", "Engfaret", "1518", "Moss");
+
+	}
+
+}

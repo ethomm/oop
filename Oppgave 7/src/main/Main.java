@@ -1,9 +1,10 @@
 package main;
 
-import gui.MainFrame;
+import gui.Gui;
 
 import java.awt.EventQueue;
 
+import salgsoversikt.SalgsOversikt;
 import varelager.VareLager;
 import kundeoversikt.Kunde;
 import kundeoversikt.KundeOversikt;
@@ -17,23 +18,27 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				//Leser inn all lagret data
-				new LesFraFil("/Users/EirikThommessen/Documents/Studier/V2015/oop/Oppgave 7/kunde.ser");
-				new LesFraFil("/Users/EirikThommessen/Documents/Studier/V2015/oop/Oppgave 7/varelager.ser");
-				new LesFraFil("/Users/EirikThommessen/Documents/Studier/V2015/oop/Oppgave 7/leverandor.ser");
+				new LesFraFil(System.getProperty("user.dir")+"/kunde.ser");
+				new LesFraFil(System.getProperty("user.dir")+"/varelager.ser");
+				new LesFraFil(System.getProperty("user.dir")+"/leverandor.ser");
 				//new LesFraFil("salg.ser");
 				
 				try {
-					MainFrame frame = new MainFrame();
+					Gui frame = new Gui();
 					frame.setVisible(true);
+					KundeOversikt kunde = new KundeOversikt();
+					LeverandorOversikt leverandor = new LeverandorOversikt();
+					SalgsOversikt salgsoversikt = new SalgsOversikt();
+					VareLager varelager = new VareLager();
+					
+					Controller controller= new Controller(frame, kunde, leverandor, salgsoversikt, varelager);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-		//LeverandorOversikt.leggTilLeverandor("Pedegree", "Arnt Ove", "artove@peddegree.no", "23423423452", "23432", "23423423", "Butikkveien", "1257", "Oslo");
-		//KundeOversikt.leggTilKunde("Janina", "martinsen", "1234", "veverbakken 1", "123", "moss");
-		//KundeOversikt.leggTilKunde("Eirik", "Thommessen", "9978897", "Engfaret", "1518", "Moss");
-
+		
+		
 	}
 
 }

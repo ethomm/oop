@@ -14,8 +14,6 @@ public class Pattedyr extends LevendeProdukt implements Serializable {
 			String slektsnavn, String artsnavn) {
 		super(navn, innPris, utPris, leverandor, produktBeskrivelse, slektsnavn,
 				artsnavn);
-		// TODO Auto-generated constructor stub
 	}
-
 	
 }

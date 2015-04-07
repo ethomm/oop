@@ -6,6 +6,12 @@
 		<item value="316" key="y"/>
 		<item value="467" key="height"/>
 	</section>
+	<section name="org.eclipse.wb.internal.core.utils.ui.dialogs.StringsDialog">
+		<item value="784" key="x"/>
+		<item value="352" key="width"/>
+		<item value="416" key="y"/>
+		<item value="267" key="height"/>
+	</section>
 	<section name="org.eclipse.wb.internal.swing.model.property.editor.border.BorderDialog">
 		<item value="508" key="x"/>
 		<item value="466" key="width"/>

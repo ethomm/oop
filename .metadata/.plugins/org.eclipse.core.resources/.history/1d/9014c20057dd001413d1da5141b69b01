@@ -1,0 +1,320 @@
+package main;
+
+
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.DefaultListModel;
+import javax.swing.text.JTextComponent;
+
+import salgsoversikt.SalgsOversikt;
+import varelager.Produkt;
+import varelager.VareLager;
+import kundeoversikt.KundeOversikt;
+import leverandoroversikt.Leverandor;
+import leverandoroversikt.LeverandorOversikt;
+import gui.Gui;
+
+public class Controller {
+	private Gui gui;
+	private KundeOversikt kundeoversikt;
+	private LeverandorOversikt leverandoroversikt;
+	private SalgsOversikt salgsoversikt;
+	private VareLager varelager;
+	
+	// konstruktør
+	public Controller(Gui gui, KundeOversikt kundeoversikt, LeverandorOversikt leverandoroversikt, SalgsOversikt salgsoversikt, VareLager varelager) {
+		this.gui = gui;
+		this.kundeoversikt = kundeoversikt;
+		this.leverandoroversikt = leverandoroversikt;
+		this.salgsoversikt = salgsoversikt;
+		this.varelager = varelager;
+		
+		//legger til nye lyttere på knapper i Gui
+		this.gui.addActionToAvbrytLeverandorBtn(new AvbrytLeverandorKnapp());
+		this.gui.addActionToLeggTilLeverandorBtn(new LeggTilLeverandørKnapp());
+		this.gui.addActionToLeggTilKundeBtn(new LeggTilKundeKnapp());
+		this.gui.addActionToAvbrytKundeBtn(new AvbrytKundeKnapp());
+		this.gui.addActionToTypeProduktCb(new TypeProdukt());
+		this.gui.addActionToLeggTilProdukteBtn(new LeggTilProdukt());
+		this.gui.addActionAvbrytProduktBtn(new AvbrytLeggTilProdukt());
+		this.gui.addActionToProduktMbtn(new ProduktInputfelt());
+		this.gui.addActionToLeverandorMbtn(new LeverandorInputfelt());
+		this.gui.addActionToKundeMbtn(new KundeInputfelt());
+		this.gui.addActionToVarelager(new VisVareoversikt());
+		
+	}
+	
+//Metoder for å håndtere data
+	
+	//Henter Vareoversikt
+	private void hentVareListeOversikt() {
+		System.out.println("Henter varelager");
+		System.out.println(VareLager.hentAlleProdukter());
+		DefaultListModel<Produkt> produktModel = new DefaultListModel<Produkt>();
+		for (Produkt prod : VareLager.hentAlleProdukter()) {
+			produktModel.addElement(prod);
+		
+		}
+		gui.setListeVarelager(produktModel);
+		
+		gui.setPrintAntallPattedyr).setText(varelager.getAntallPattedyr());
+		
+	}
+	
+	// Setter JPaneler som ikke er i bruk til false
+	public void setInvisible() {
+	gui.getLeggTilKunde().setVisible(false);
+	gui.getLeggTilVare().setVisible(false);
+	gui.getLeggTilLeverandor().setVisible(false);
+	gui.VareLagerOversikt.setVisible(false);
+	}
+
+	// oppdaterer leverandørlise
+	private void updateLeverandor() {
+	 gui.getCbLeverandor().removeAllItems();
+		for (Leverandor lev : LeverandorOversikt.hentLeverandorer()) {
+			gui.getCbLeverandor().addItem(lev);
+		}
+	}
+	
+	//indreklasser som lager logikk for knappene
+	//Klasse viser Varelageroversikten når klikket på knapp
+	private class VisVareoversikt implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e){
+			setInvisible();
+			hentVareListeOversikt();
+			gui.VareLagerOversikt.setVisible(true);
+			
+			
+		}
+
+		
+	}
+	//Klasse for å vise produkt inputfeltet
+	private class ProduktInputfelt implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e){
+			setInvisible();
+			gui.LeggTilVare.setVisible(true);
+			updateLeverandor();
+		}
+	}
+	
+	//Klasse for å vise kunde inputfeltet
+	private class KundeInputfelt implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e){
+			setInvisible();
+			gui.LeggTilKunde.setVisible(true);
+		}
+	}
+	//klasse for å vise Leverandør inputfeltet
+	private class LeverandorInputfelt implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e){
+			setInvisible();
+			gui.LeggTilLeverandor.setVisible(true);
+		}
+	}
+	//Klasse for å legge til Produkter
+	private class LeggTilProdukt implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e){
+				// Legger til Produkter
+				String type = (String) gui.getCbTypeProdukt().getSelectedItem();
+				String navn = gui.getTxtProduktNavn().getText();
+				double prisinn = Integer.parseInt(gui.getTxtPrisInn().getText());
+				double prisut = Integer.parseInt(gui.getTxtPrisUt().getText());
+				Leverandor leverandor = (Leverandor) gui.getCbLeverandor().getSelectedItem();
+				String produktBeskrivelse = gui.getTxtProduktBeskrivelse().getText();
+				if (type == "Pattedyr") {
+					String artnavn = gui.getTxtProduktArtsNavn().getText();
+					String slektsnavn = gui.getTxtProduktSleksNavn().getText();
+					VareLager.leggTilPattedyr(navn, prisinn, prisut, leverandor,
+									produktBeskrivelse, slektsnavn, artnavn);
+				} else if (type == "Reptil") {
+					String artnavn = gui.getTxtProduktArtsNavn().getText();
+					String slektsnavn = gui.getTxtProduktSleksNavn().getText();
+					VareLager.leggTilReptil(navn, prisinn, prisut, leverandor,
+							produktBeskrivelse, slektsnavn, artnavn);
+				} else if (type == "Fisk") {
+					int antall = Integer.parseInt(gui.getTxtAntallAvProdukt().getText());
+					String artnavn = gui.getTxtProduktArtsNavn().getText();
+					String slektsnavn = gui.getTxtProduktSleksNavn().getText();
+					VareLager.leggTilFisk(navn, prisinn, prisut, leverandor,
+							produktBeskrivelse, antall, slektsnavn, artnavn);
+				} else if (type == "Annet Produkt") {
+					int antall = Integer.parseInt(gui.getTxtAntallAvProdukt().getText());
+					VareLager.leggTilAnnetProdukt(navn, prisinn, prisut,
+							leverandor, produktBeskrivelse, antall);
+				}
+				gui.getTxtProduktBeskrivelse().setText("");
+				gui.getTxtPrisInn().setText("");
+				gui.getTxtPrisUt().setText("");
+				gui.getTxtProduktArtsNavn().setText("");
+				gui.getTxtProduktNavn().setText("");
+				gui.getTxtProduktSleksNavn().setText("");
+				gui.getTxtAntallAvProdukt().setText("");
+
+				gui.getLblProduktAdvarsel().setText("Produkt lagt til i varelageret");
+				
+			}
+	}
+	
+	//Klasse for å avbryte produkter
+	private class AvbrytLeggTilProdukt implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e){
+			gui.getTxtProduktBeskrivelse().setText("");
+			gui.getTxtPrisInn().setText("");
+			gui.getTxtPrisUt().setText("");
+			gui.getTxtProduktArtsNavn().setText("");
+			gui.getTxtProduktNavn().setText("");
+			gui.getTxtProduktSleksNavn().setText("");
+			gui.getTxtAntallAvProdukt().setText("");
+			gui.panelPattedyrReptil.setVisible(false);
+			setInvisible();
+		}
+}
+	
+	//Ser etter hvilket type produkt som ønskes å legges til
+	private class TypeProdukt implements  ItemListener{
+		 @Override
+		 public void itemStateChanged(ItemEvent e){
+			// Ser hva som er valgt i Comboboxen med Valg av type produkt
+				// som skal legges til
+				String type = (String) gui.getCbTypeProdukt().getSelectedItem();
+				// Dersom Valget er Pattedyr eller Reptil Fjernes de
+				// inputfeltene som ikke behoves til å legge til disse
+				if (type == "Pattedyr" || type == "Reptil") {
+					gui.panelPattedyrReptil.setVisible(true);
+					gui.getTxtAntallAvProdukt().setVisible(false);
+					gui.getLblAntall().setVisible(false);
+					gui.getLblArtsnavn().setVisible(true);
+					gui.getLblSlektsnavn().setVisible(true);
+					gui.getTxtProduktArtsNavn().setVisible(true);
+					gui.getTxtProduktSleksNavn().setVisible(true);
+				} else if (type == "Annet Produkt") {
+					gui.panelPattedyrReptil.setVisible(true);
+					gui.getTxtAntallAvProdukt().setVisible(true);
+					gui.getLblAntall().setVisible(true);
+					gui.getLblArtsnavn().setVisible(false);
+					gui.getLblSlektsnavn().setVisible(false);
+					gui.getTxtProduktArtsNavn().setVisible(false);
+					gui.getTxtProduktSleksNavn().setVisible(false);
+				} else if (type == "Fisk") {
+					gui.panelPattedyrReptil.setVisible(true);
+					gui.getTxtAntallAvProdukt().setVisible(true);
+					gui.getLblAntall().setVisible(true);
+					gui.getLblArtsnavn().setVisible(true);
+					gui.getLblSlektsnavn().setVisible(true);
+					gui.getTxtProduktArtsNavn().setVisible(true);
+					gui.getTxtProduktSleksNavn().setVisible(true);
+				}
+		 }
+	}
+	
+	//Legg til Kunde
+	private class LeggTilKundeKnapp implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e){
+				String fNavn = gui.getTxtKundeFornavn().getText();
+				String eNavn = gui.getTxtKundeEtternavn().getText();
+				String tlf = gui.getTxtKundeTlf().getText();
+				String adresse = gui.getTxtKundeAdresse().getText();
+				String postNR = gui.getTxtKundePostnr().getText();
+				String postSted = gui.getTxtKundePoststed().getText();
+
+				KundeOversikt.leggTilKunde(fNavn, eNavn, tlf, adresse, postNR,
+						postSted);
+
+				gui.getLblAdvarselLagtTilKunde().setText("Kunde: " + fNavn + " " + eNavn
+						+ ", er lagt til");
+
+				// Tømmer Feltene til Legg til Kunde
+				gui.getTxtKundeAdresse().setText("");
+				gui.getTxtKundeEtternavn().setText("");
+				gui.getTxtKundeFornavn().setText("");
+				gui.getTxtKundePostnr().setText("");
+				gui.getTxtKundePoststed().setText("");
+				gui.getTxtKundeTlf().setText("");
+			}
+	}
+	
+	//Avbryt Kunde
+	private class AvbrytKundeKnapp implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e){
+			// Tømmer feltene i Legg til Kunde
+			gui.getTxtKundeAdresse().setText("");
+			gui.getTxtKundeEtternavn().setText("");
+			gui.getTxtKundeFornavn().setText("");
+			gui.getTxtKundePostnr().setText("");
+			gui.getTxtKundePoststed().setText("");
+			gui.getTxtKundeTlf().setText("");
+		}
+}
+
+	
+	//Legg til Leverandør
+	private class LeggTilLeverandørKnapp implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e){
+				String navn = gui.getTxtLeverandorNavn().getText();
+				String selger = gui.getTxtLeverandorSelger().getText();
+				String epost = gui.getTxtLeverandorEpost().getText();
+				String kontoNr = gui.getTxtLeverandorKontonr().getText();
+				String KundeNrHosLev = gui.getTxtLeverandorKundeNr().getText();
+				String tlf = gui.getTxtLeverandorTlf().getText();
+				String adr = gui.getTxtLeverandorAdresse().getText();
+				String postNr = gui.getTxtLeverandorPostNr().getText();
+				String postSted = gui.getTxtLeverandorPoststed().getText();
+
+				LeverandorOversikt.leggTilLeverandor(navn, selger, epost,
+						kontoNr, KundeNrHosLev, tlf, adr, postNr, postSted);
+
+				gui.getLblAdvarselLeverandor().setText("Leverandor: " + navn
+						+ ", er lagt til");
+
+				gui.getTxtLeverandorNavn().setText("");
+				gui.getTxtLeverandorSelger().setText("");
+				gui.getTxtLeverandorEpost().setText("");
+				gui.getTxtLeverandorKontonr().setText("");
+				gui.getTxtLeverandorKundeNr().setText("");
+				gui.getTxtLeverandorTlf().setText("");
+				gui.getTxtLeverandorAdresse().setText("");
+				gui.getTxtLeverandorPostNr().setText("");
+				gui.getTxtLeverandorPoststed().setText("");
+
+				updateLeverandor();
+		
+			}
+	}
+	
+	//Avbryt Leverandør
+	private	class AvbrytLeverandorKnapp implements ActionListener{
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					System.out.println("indreklasse");
+					gui.getTxtLeverandorNavn().setText("");
+					gui.getTxtLeverandorSelger().setText("");
+					gui.getTxtLeverandorEpost().setText("");
+					gui.getTxtLeverandorKontonr().setText("");
+					gui.getTxtLeverandorKundeNr().setText("");
+					gui.getTxtLeverandorTlf().setText("");
+					gui.getTxtLeverandorAdresse().setText("");
+					gui.getTxtLeverandorPostNr().setText("");
+					gui.getTxtLeverandorPoststed().setText("");
+
+					setInvisible();	
+
+				}
+			}
+	
+}

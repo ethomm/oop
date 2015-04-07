@@ -1,9 +1,15 @@
 package varelager;
 
+import java.io.Serializable;
+
 import leverandoroversikt.Leverandor;
 
-public class Produkt {
+public class Produkt implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -773038970547786440L;
 	private String navn;
 	private double innPris;
 	private double utPris;
@@ -20,7 +26,7 @@ public class Produkt {
 		this.leverandor = leverandor;
 		this.produktBeskrivelse = produktBeksrivelse;
 	}
-
+	
 	public String getNavn() {
 		return navn;
 	}
