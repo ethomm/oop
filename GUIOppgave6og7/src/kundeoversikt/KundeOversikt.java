@@ -1,0 +1,23 @@
+package kundeoversikt;
+import java.util.ArrayList;
+
+public class KundeOversikt {
+
+	private static ArrayList<Kunde> kundeListe = new ArrayList<Kunde>();
+	
+	public static void leggTilKunde(String forNavn, String etterNavn, String telefon, String adresse, String postnr, String poststed) {
+	 
+	kundeListe.add(new Kunde(forNavn, etterNavn, telefon, adresse, postnr, poststed));
+
+	} 
+	
+	public static Kunde hentKunde(String kundeNr) {
+	
+		for(Kunde k: kundeListe) {
+			if(k.getTlf() == kundeNr) {
+				return k;
+			}
+		}
+		return null;
+	}
+}

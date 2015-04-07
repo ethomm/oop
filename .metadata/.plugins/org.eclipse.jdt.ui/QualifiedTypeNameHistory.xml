@@ -1,33 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.swing.JLabel"/>
-<fullyQualifiedTypeName name="medlemmer.Leverandor"/>
-<fullyQualifiedTypeName name="javax.management.timer.Timer"/>
-<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
-<fullyQualifiedTypeName name="java.io.ObjectOutputStream"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="main.SkrivTilFil"/>
-<fullyQualifiedTypeName name="java.io.FileInputStream"/>
-<fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
-<fullyQualifiedTypeName name="salgsoversikt.SalgsOversikt"/>
-<fullyQualifiedTypeName name="salgsoversikt.Salg"/>
-<fullyQualifiedTypeName name="main.LesFraFil"/>
-<fullyQualifiedTypeName name="kundeoversikt.Kunde"/>
-<fullyQualifiedTypeName name="varelager.Reptil"/>
-<fullyQualifiedTypeName name="leverandoroversikt.Leverandor"/>
-<fullyQualifiedTypeName name="gui.EventHandler"/>
-<fullyQualifiedTypeName name="gui.MainFrame"/>
-<fullyQualifiedTypeName name="kundeoversikt.KundeOversikt"/>
-<fullyQualifiedTypeName name="leverandoroversikt.LeverandorOversikt"/>
-<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
-<fullyQualifiedTypeName name="main.Controller.VisVareoversikt"/>
-<fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="javax.swing.DefaultListModel"/>
-<fullyQualifiedTypeName name="varelager.Produkt"/>
-<fullyQualifiedTypeName name="java.io.Serializable"/>
-<fullyQualifiedTypeName name="varelager.Pattedyr"/>
-<fullyQualifiedTypeName name="varelager.Fisk"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="varelager.VareLager"/>
+<fullyQualifiedTypeName name="varelager.Pattedyr"/>
+<fullyQualifiedTypeName name="varelager.Reptil"/>
+<fullyQualifiedTypeName name="varelager.Fisk"/>
 <fullyQualifiedTypeName name="varelager.AnnetProdukt"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="javax.swing.event.ListSelectionListener"/>
+<fullyQualifiedTypeName name="javax.swing.event.ListSelectionEvent"/>
+<fullyQualifiedTypeName name="main.Controller.visVareDetaljerIOversikt"/>
 </qualifiedTypeNameHistroy>

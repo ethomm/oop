@@ -13,7 +13,7 @@ public class Main {
 			@Override
 			public void run() {
 				//Starter GUI
-				new MainFrame("¯vningsoppgave 4");
+				new MainFrame("Ã˜vningsoppgave 4");
 				
 			}
 		});

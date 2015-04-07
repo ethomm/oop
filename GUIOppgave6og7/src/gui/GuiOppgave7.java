@@ -1,0 +1,150 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.FlowLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLayeredPane;
+
+public class GuiOppgave7 extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField fornavnKunde;
+	private JTextField etternavnKunde;
+	private JTextField telefonKunde;
+	private JTextField adresseKunde;
+	private JTextField postnrKunde;
+	private JTextField poststedKunde;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GuiOppgave7 frame = new GuiOppgave7();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public GuiOppgave7() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 756, 521);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnFil = new JMenu("Fil");
+		menuBar.add(mnFil);
+		
+		JMenuItem mntmSave = new JMenuItem("Save");
+		mnFil.add(mntmSave);
+		
+		JMenuItem mntmLoadFile = new JMenuItem("Load File");
+		mnFil.add(mntmLoadFile);
+		
+		JMenu mnLeggTil = new JMenu("Legg til");
+		menuBar.add(mnLeggTil);
+		
+		JMenuItem mntmKunde = new JMenuItem("Kunde");
+		mnLeggTil.add(mntmKunde);
+		
+		JMenuItem mntmLeverandr = new JMenuItem("Leverandør");
+		mnLeggTil.add(mntmLeverandr);
+		
+		JMenuItem mntmProdukt = new JMenuItem("Produkt");
+		mnLeggTil.add(mntmProdukt);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel leggTilKunde = new JPanel();
+		leggTilKunde.setBounds(6, 10, 317, 461);
+		contentPane.add(leggTilKunde);
+		leggTilKunde.setLayout(null);
+		
+		fornavnKunde = new JTextField();
+		fornavnKunde.setBounds(106, 43, 186, 28);
+		leggTilKunde.add(fornavnKunde);
+		fornavnKunde.setColumns(10);
+		
+		etternavnKunde = new JTextField();
+		etternavnKunde.setBounds(106, 83, 186, 28);
+		leggTilKunde.add(etternavnKunde);
+		etternavnKunde.setColumns(10);
+		
+		telefonKunde = new JTextField();
+		telefonKunde.setBounds(106, 123, 186, 28);
+		leggTilKunde.add(telefonKunde);
+		telefonKunde.setColumns(10);
+		
+		adresseKunde = new JTextField();
+		adresseKunde.setBounds(106, 163, 186, 28);
+		leggTilKunde.add(adresseKunde);
+		adresseKunde.setColumns(10);
+		
+		postnrKunde = new JTextField();
+		postnrKunde.setBounds(106, 203, 94, 28);
+		leggTilKunde.add(postnrKunde);
+		postnrKunde.setColumns(10);
+		
+		poststedKunde = new JTextField();
+		poststedKunde.setBounds(106, 243, 186, 28);
+		leggTilKunde.add(poststedKunde);
+		poststedKunde.setColumns(10);
+		
+		JLabel lblFornavnKunde = new JLabel("Fornavn:");
+		lblFornavnKunde.setBounds(6, 49, 61, 16);
+		leggTilKunde.add(lblFornavnKunde);
+		
+		JLabel lblEtternavnKunde = new JLabel("Etternavn:");
+		lblEtternavnKunde.setBounds(6, 89, 76, 16);
+		leggTilKunde.add(lblEtternavnKunde);
+		
+		JLabel lblTelefonKunde = new JLabel("Telefon:");
+		lblTelefonKunde.setBounds(6, 129, 61, 16);
+		leggTilKunde.add(lblTelefonKunde);
+		
+		JLabel lblAdresseKunde = new JLabel("Adresse:");
+		lblAdresseKunde.setBounds(6, 169, 61, 16);
+		leggTilKunde.add(lblAdresseKunde);
+		
+		JLabel lblPostnrKunde = new JLabel("Postnr:");
+		lblPostnrKunde.setBounds(6, 209, 61, 16);
+		leggTilKunde.add(lblPostnrKunde);
+		
+		JLabel lblPoststedKunde = new JLabel("Poststed:");
+		lblPoststedKunde.setBounds(6, 249, 61, 16);
+		leggTilKunde.add(lblPoststedKunde);
+		
+		JButton btnLeggTilKunde = new JButton("Legg til");
+		btnLeggTilKunde.setBounds(175, 361, 117, 29);
+		leggTilKunde.add(btnLeggTilKunde);
+		
+		JLabel lblLeggTilNy = new JLabel("Legg til ny kunde:");
+		lblLeggTilNy.setBounds(6, 6, 200, 25);
+		leggTilKunde.add(lblLeggTilNy);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(335, 10, 298, 370);
+		contentPane.add(panel);
+	}
+}

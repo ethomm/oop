@@ -1,0 +1,47 @@
+package main;
+
+import gui.Gui;
+
+import java.awt.EventQueue;
+
+import salgsoversikt.SalgsOversikt;
+import varelager.AnnetProdukt;
+import varelager.Produkt;
+import varelager.VareLager;
+import kundeoversikt.Kunde;
+import kundeoversikt.KundeOversikt;
+import leverandoroversikt.Leverandor;
+import leverandoroversikt.LeverandorOversikt;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				//Leser inn all lagret data
+				new LesFraFil(System.getProperty("user.dir")+"/kunde.ser");
+				new LesFraFil(System.getProperty("user.dir")+"/varelager.ser");
+				new LesFraFil(System.getProperty("user.dir")+"/leverandor.ser");
+				//new LesFraFil("salg.ser");
+				
+				try {
+					Gui frame = new Gui();
+					frame.setVisible(true);
+					KundeOversikt kunde = new KundeOversikt();
+					LeverandorOversikt leverandor = new LeverandorOversikt();
+					SalgsOversikt salgsoversikt = new SalgsOversikt();
+					VareLager varelager = new VareLager();
+					
+					Controller controller= new Controller(frame, kunde, leverandor, salgsoversikt, varelager);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	
+		
+		
+	}
+
+}

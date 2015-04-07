@@ -1,15 +1,15 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.management.timer.Timer;
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+<<<<<<< Updated upstream
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+=======
+>>>>>>> Stashed changes
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -23,11 +23,14 @@ import varelager.Reptil;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import javax.swing.JTextPane;
+import java.awt.Font;
 
 public class MainFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfNavn;
 	private JTextField tfArtNavn;
@@ -62,7 +65,8 @@ public class MainFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame() {
+	public MainFrame(String tittel) {
+		setTitle(tittel);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 680, 450);
 		
@@ -80,8 +84,12 @@ public class MainFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		//Endrer bakgrunsfargen
+		contentPane.setBackground(Color.WHITE);
+		
 		
 		JLabel lblLeggTilVare = new JLabel("Legg til:");
+		lblLeggTilVare.setFont(new Font("Helvetica", Font.BOLD, 13));
 		lblLeggTilVare.setBounds(19, 31, 183, 16);
 		contentPane.add(lblLeggTilVare);
 		
@@ -90,6 +98,7 @@ public class MainFrame extends JFrame {
 		contentPane.add(panVare);
 		panVare.setLayout(null);
 		panVare.setVisible(false);
+		panVare.setBackground(Color.WHITE);
 		
 		tfNavn = new JTextField();
 		tfNavn.setBounds(145, 6, 134, 28);
@@ -121,32 +130,38 @@ public class MainFrame extends JFrame {
 		panVare.add(LevBoks);
 		
 		JLabel lblNavn = new JLabel("Navn");
+		lblNavn.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		lblNavn.setBounds(6, 12, 61, 16);
 		panVare.add(lblNavn);
 		
 		JLabel lblLeverandor = new JLabel("Leverandor:");
+		lblLeverandor.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		lblLeverandor.setBounds(6, 89, 100, 16);
 		panVare.add(lblLeverandor);
 		
 		JLabel lblArtsmavm = new JLabel("Artsnavn:");
+		lblArtsmavm.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		lblArtsmavm.setBounds(6, 130, 89, 16);
 		panVare.add(lblArtsmavm);
 		
 		JLabel lblSlektsnavn = new JLabel("Slektsnavn");
+		lblSlektsnavn.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		lblSlektsnavn.setBounds(6, 170, 100, 16);
 		panVare.add(lblSlektsnavn);
 		
 		JLabel lblPrisInn = new JLabel("Pris inn:");
+		lblPrisInn.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		lblPrisInn.setBounds(6, 210, 61, 16);
 		panVare.add(lblPrisInn);
 		
 		JLabel lblPrisUt = new JLabel("Pris ut:");
+		lblPrisUt.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		lblPrisUt.setBounds(6, 250, 61, 16);
 		panVare.add(lblPrisUt);
 		
 		JButton btnLeggTilVare = new JButton("Legg til vare");
 		btnLeggTilVare.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {				
 				//henter informasjonen fra tekstboksene 
 				String navn = tfNavn.getText();
 				double innPris = Integer.parseInt(tfPrisInn.getText());
@@ -175,12 +190,13 @@ public class MainFrame extends JFrame {
 				oppdaterVarer();
 				panVare.setVisible(false);
 				//Gir brukeren en advarsel
-				advarsel("Du har lagt til en ny vare");
+				advarsel("Du har lagt til en ny vare", Color.BLUE);
 				tfNavn.setText("");
 				tfPrisInn.setText("");
 				tfPrisUt.setText("");
 				tfSlektsNavn.setText("");
 				tfArtNavn.setText("");
+				
 			}
 		});
 		btnLeggTilVare.setBounds(162, 284, 117, 29);
@@ -194,6 +210,7 @@ public class MainFrame extends JFrame {
 		cbType.addItem("Reptil");
 		
 		JLabel lblType = new JLabel("Type Vare");
+		lblType.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		lblType.setBounds(6, 50, 61, 16);
 		panVare.add(lblType);
 		
@@ -202,6 +219,8 @@ public class MainFrame extends JFrame {
 		contentPane.add(panLeverandor);
 		panLeverandor.setLayout(null);
 		panLeverandor.setVisible(false);
+		//endrer bakgrunsvafe på leverandørpanelet
+		panLeverandor.setBackground(Color.WHITE);
 		
 		tfLNavn = new JTextField();
 		tfLNavn.setBounds(145, 6, 134, 28);
@@ -270,7 +289,11 @@ public class MainFrame extends JFrame {
 				new Leverandor(navn, ePost, adr, pSted, tlf);
 				updateLev();
 				panLeverandor.setVisible(false);
+<<<<<<< Updated upstream
 				advarsel("Du har lagt til en ny Leverand�r");
+=======
+				advarsel("Du har lagt til en ny Leverand\u00F8rr", Color.BLUE);
+>>>>>>> Stashed changes
 				tfLNavn.setText("");
 				tfLEpost.setText("");
 				tfLAdresse.setText("");
@@ -283,17 +306,25 @@ public class MainFrame extends JFrame {
 		panLeverandor.add(btnLeggTilLeverandr);
 		
 		JButton btnVare = new JButton("Vare");
+		btnVare.setBackground(Color.WHITE);
 		btnVare.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tomadvarsel();
+				//Sjekker om det finnes en leverandør
+				if(Leverandor.getLeverandorliste().size() <= 0){
+					advarsel("Legg til leverandør først", Color.RED);
+				}else{
 				panVare.setVisible(true);
 				panLeverandor.setVisible(false);
 			}
+			}		
+				
 		});
 		btnVare.setBounds(74, 26, 66, 29);
 		contentPane.add(btnVare);
 		
 		JButton btnLeverandr = new JButton("Leverand\u00F8r");
+		btnLeverandr.setBackground(Color.WHITE);
 		btnLeverandr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tomadvarsel();
@@ -308,36 +339,45 @@ public class MainFrame extends JFrame {
 		panel.setBounds(316, 80, 267, 84);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		panel.setBackground(Color.WHITE);
 		
 		JLabel lblNewLabel = new JLabel("Antall Produkter:");
+		lblNewLabel.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		lblNewLabel.setBounds(6, 6, 141, 16);
 		panel.add(lblNewLabel);
 		
 		JLabel lblAntallFisk = new JLabel("Antall Fisk");
+		lblAntallFisk.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		lblAntallFisk.setBounds(6, 23, 141, 16);
 		panel.add(lblAntallFisk);
 		
 		JLabel lblAntallPattedyr = new JLabel("Antall Pattedyr:");
+		lblAntallPattedyr.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		lblAntallPattedyr.setBounds(6, 42, 141, 16);
 		panel.add(lblAntallPattedyr);
 		
 		JLabel lblAntallReptiler = new JLabel("Antall Reptiler");
+		lblAntallReptiler.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		lblAntallReptiler.setBounds(6, 59, 141, 16);
 		panel.add(lblAntallReptiler);
 		
 		lblSumAntallPattedyr = new JLabel("0");
+		lblSumAntallPattedyr.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		lblSumAntallPattedyr.setBounds(132, 42, 61, 16);
 		panel.add(lblSumAntallPattedyr);
 		
 		lblSumAntallFisk = new JLabel("0");
+		lblSumAntallFisk.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		lblSumAntallFisk.setBounds(132, 23, 61, 16);
 		panel.add(lblSumAntallFisk);
 		
 		lblSumAntallProdukter = new JLabel("0");
+		lblSumAntallProdukter.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		lblSumAntallProdukter.setBounds(132, 6, 61, 16);
 		panel.add(lblSumAntallProdukter);
 		
 		lblSumAntallReptiler = new JLabel("0");
+		lblSumAntallReptiler.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		lblSumAntallReptiler.setBounds(132, 59, 61, 16);
 		panel.add(lblSumAntallReptiler);
 		
@@ -345,6 +385,7 @@ public class MainFrame extends JFrame {
 		panelAdvarsel.setBounds(316, 6, 351, 67);
 		contentPane.add(panelAdvarsel);
 		panelAdvarsel.setLayout(null);
+		panelAdvarsel.setBackground(Color.WHITE);
 		
 		lblAdvarsel = new JLabel("");
 		lblAdvarsel.setBounds(6, 6, 339, 55);
@@ -354,6 +395,7 @@ public class MainFrame extends JFrame {
 		panel_1.setBounds(316, 194, 340, 171);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
+		panel_1.setBackground(Color.WHITE);
 		
 		JLabel lblSelgVare = new JLabel("Selg vare:");
 		lblSelgVare.setBounds(6, 6, 131, 16);
@@ -362,12 +404,21 @@ public class MainFrame extends JFrame {
 		JButton btnPattedyr = new JButton("Pattedyr");
 		btnPattedyr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< Updated upstream
 				//T�mmer advarselfeltet
+=======
+				//Tømmer advarselfeltet
+>>>>>>> Stashed changes
 				tomadvarsel();
+				//Sjekk om det er noen pattedyr å selge
+				if(Pattedyr.getPattedyrliste().size() <= 0){
+					advarsel("Du har ingen pattedyr å selge", Color.RED);
+				}else{
 				//Setter sin jukse boolean til sann
 				pattedyr = true;
 				fisk = false;
 				reptil = false;
+<<<<<<< Updated upstream
 				//T�m Listen vareliste 
 				cbVareliste.removeAllItems();
 				//n�r klikket hent liste
@@ -375,22 +426,42 @@ public class MainFrame extends JFrame {
 					cbVareliste.addItem(p);
 				}
 				//n�r klikket gj�r liste synlig sammen med selgknapp
+=======
+				//Tøm Listen vareliste 
+				cbVareliste.removeAllItems();
+				//når klikket hent liste
+				for (Pattedyr p: Pattedyr.getPattedyrliste()){
+					cbVareliste.addItem(p);
+				}
+				//når klikket gjør liste synlig sammen med selgknapp
+>>>>>>> Stashed changes
 				cbVareliste.setVisible(true);
 				btnSelg.setVisible(true);
+				}
 			}
 		});
 		btnPattedyr.setBounds(6, 34, 117, 29);
 		panel_1.add(btnPattedyr);
 		
+		
 		JButton btnReptil = new JButton("Reptil");
 		btnReptil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< Updated upstream
 				//T�mmer advarselfeltet
+=======
+				//Tømmer advarselfeltet
+>>>>>>> Stashed changes
 				tomadvarsel();
+				//Sjekk om det er noen reptil å selge
+				if(Reptil.getReptilliste().size() <= 0){
+					advarsel("Du har ingen reptiler å selge", Color.RED);
+				}else{
 				//Setter sin jukse boolean til sann
 				reptil = true;
 				fisk = false;
 				pattedyr = false;
+<<<<<<< Updated upstream
 				//T�m Listen vareliste 
 				cbVareliste.removeAllItems();
 				//n�r klikket hent liste
@@ -398,9 +469,18 @@ public class MainFrame extends JFrame {
 					cbVareliste.addItem(r);
 				}
 				//n�r klikket gj�r liste synlig sammen med selgknapp
+=======
+				//Tøm Listen vareliste 
+				cbVareliste.removeAllItems();
+				//når klikket hent liste
+				for(Reptil r: Reptil.getReptilliste()){
+					cbVareliste.addItem(r);
+				}
+				//når klikket gjør liste synlig sammen med selgknapp
+>>>>>>> Stashed changes
 				cbVareliste.setVisible(true);
 				btnSelg.setVisible(true);
-				
+				}	
 			}
 		});
 		btnReptil.setBounds(119, 34, 96, 29);
@@ -409,12 +489,21 @@ public class MainFrame extends JFrame {
 		JButton btnFisk = new JButton("Fisk");
 		btnFisk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< Updated upstream
 				//T�mmer advarselfeltet
+=======
+				//Tømmer advarselfeltet
+>>>>>>> Stashed changes
 				tomadvarsel();
+				//Sjekk om det er noen fisk å selge
+				if(Fisk.getFiskeliste().size() <= 0){
+					advarsel("Du har ingen fisk å selge", Color.RED);
+				}else{
 				//Setter sin jukse boolean til sann
 				fisk = true;
 				pattedyr = false;
 				reptil = false;
+<<<<<<< Updated upstream
 				//T�m Listen vareliste
 				cbVareliste.removeAllItems();
 				//n�r klikket hent liste
@@ -422,8 +511,18 @@ public class MainFrame extends JFrame {
 					cbVareliste.addItem(f);
 				}
 				//n�r klikket gj�r liste synlig sammen med selgknapp
+=======
+				//Tøm Listen vareliste
+				cbVareliste.removeAllItems();
+				//når klikket hent liste
+				for (Fisk f: Fisk.getFiskeliste()){
+					cbVareliste.addItem(f);
+				}
+				//når klikket gjør liste synlig sammen med selgknapp
+>>>>>>> Stashed changes
 				cbVareliste.setVisible(true);
 				btnSelg.setVisible(true);
+			}
 			}
 		});
 		btnFisk.setBounds(217, 34, 96, 29);
@@ -455,7 +554,7 @@ public class MainFrame extends JFrame {
 				}
 				
 				//hjem knappen og feltet
-				advarsel("Du har solgt en vare");
+				advarsel("Du har solgt en vare", Color.BLUE);
 				oppdaterVarer();
 				btnSelg.setVisible(false);
 				cbVareliste.setVisible(false);
@@ -466,8 +565,9 @@ public class MainFrame extends JFrame {
 		btnSelg.setVisible(false);
 	}
 	
-	private void advarsel(String txt){
+	private void advarsel(String txt, Color farge){
 		lblAdvarsel.setText(txt);
+		lblAdvarsel.setForeground(farge);;
 	}
 
 
@@ -475,7 +575,11 @@ public class MainFrame extends JFrame {
 		lblAdvarsel.setText("");
 	}
 	
+<<<<<<< Updated upstream
 	//oppdaterer leverand�rlise
+=======
+	//oppdaterer leverandørlise
+>>>>>>> Stashed changes
 	private void updateLev(){
 		LevBoks.removeAllItems();
 		for (Leverandor l: Leverandor.getLeverandorliste()){

@@ -1,0 +1,41 @@
+package varelager;
+
+import java.util.ArrayList;
+
+import leverandoroversikt.Leverandor;
+
+public class VareLager {
+
+	private static ArrayList<Produkt> produktListe = new ArrayList<Produkt>();
+
+	//Legger til Reptiler i listen
+	public static void leggTilReptil(String navn, double innPris, double utPris, 
+			Leverandor leverandor, String produktBeskrivelse, String slektsnavn, String artsnavn){
+		produktListe.add(new Reptil(navn, innPris, utPris, leverandor, produktBeskrivelse, slektsnavn, artsnavn));
+	}
+	
+	//Legger til Pattedyr i listen 
+	public static void leggTilPattedyr(String navn, double innPris, double utPris, 
+			Leverandor leverandor, String produktBeskrivelse, String slektsnavn, String artsnavn){
+		produktListe.add(new Pattedyr(navn, innPris, utPris, leverandor, produktBeskrivelse, slektsnavn, artsnavn));
+	}
+	
+	//Legger til Fisker i listen
+	public static void leggTilFisk(String navn, double innPris, double utPris, 
+			Leverandor leverandor, String produktBeskrivelse, int antallAvType, String slektsnavn, String artsnavn){
+		produktListe.add(new Fisk(navn, innPris, utPris, leverandor, produktBeskrivelse, slektsnavn, artsnavn, antallAvType));
+	}
+	//legger til AnnetProdukt i listen
+	public static void leggTilAnnetProdukt(String navn, double innPris, double utPris, 
+			Leverandor leverandor, String produktBeskrivelse, int antallAvType){
+		produktListe.add(new AnnetProdukt(navn, innPris, utPris, leverandor, produktBeskrivelse, antallAvType));
+	}
+	
+	
+	
+	public static ArrayList hentAlleProdukter(){
+		return produktListe;
+		
+	}
+	
+}

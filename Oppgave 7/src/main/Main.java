@@ -18,9 +18,15 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				//Leser inn all lagret data
+<<<<<<< Updated upstream
 				new LesFraFil(System.getProperty("user.dir")+"/kunde.ser");
 				new LesFraFil(System.getProperty("user.dir")+"/varelager.ser");
 				new LesFraFil(System.getProperty("user.dir")+"/leverandor.ser");
+=======
+				new LesFraFil("/Users/EirikThommessen/Documents/Studier/V2015/oop/Oppgave 7/kunde.ser");
+				new LesFraFil("/Users/EirikThommessen/Documents/Studier/V2015/oop/Oppgave 7/varelager.ser");
+				new LesFraFil("/Users/thomasengebretsen/Documents/Spillprogrammering/oop/Oppgave 7/leverandor.ser");
+>>>>>>> Stashed changes
 				//new LesFraFil("salg.ser");
 				
 				try {
